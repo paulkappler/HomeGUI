@@ -4,7 +4,7 @@ import logging
 import socket
 
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidgetItem
-from PyQt5.QtCore import Qt,QTimer,QObject
+from PyQt5.QtCore import Qt,QTimer,QObject,QEvent
 from datetime import datetime
 
 
@@ -12,8 +12,20 @@ import mywidget
 from phue import Bridge
 
 class UiEventFilter(QObject):
-    def eventFilter(self, event):
-        print(event)
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.MouseMove:
+            global mIdle
+            if mIdle > 5:
+                logger = logging.getLogger('HomeGUI')
+                logger.info("MouseMove Event " + str(mIdle) )
+
+                mIdle = 0
+                Widget.setMouseTracking(False)
+                refreshList()
+                set_backlight(True)
+                set_brightness(60)
+
+        return False
 
 
 
@@ -50,27 +62,30 @@ def on_bathroom():
     logger = logging.getLogger('HomeGUI')
     logger.info( "bathroom")
     b.set_group(2,"on",True)
+    refreshList()
 
     ui.bathroomButton.setEnabled(True)
-    refreshList()
-    
+
 def on_bathroom_off():
     ui.bathroomOffButton.setEnabled(False)
     logger = logging.getLogger('HomeGUI')
     logger.info( "bathroom off")
     b.set_group(2,"on",False)
 
+    refreshList()
+
     ui.bathroomOffButton.setEnabled(True)
-    refreshList()    
-    
+
     
 
 def on_exit():
-    print "exit button clicked"
+    logger = logging.getLogger('HomeGUI')
+    logger.info("Exit Button"  )
     sys.exit(0)
     
 def on_reset():
-    print "exit button clicked"
+    logger = logging.getLogger('HomeGUI')
+    logger.info("reset Button"  )
     sys.exit(0)
     
 def set_brightness(light):
@@ -99,37 +114,20 @@ def set_backlight(light):
         logger = logging.getLogger('HomeGUI')
         logger.info("mBacklight:" + str(mBacklight))
 
-        
-def myMove (event): 
-    global mCountdown 
-    if mCountdown < 58:
-        mCountdown = 60
-        Widget.setMouseTracking(False)
-        ui.tabWidget.show()
-        refreshList()
-        set_backlight(True)
-        set_brightness(60)
-        
-        logger = logging.getLogger('HomeGUI')
-        logger.info("myMove")
 
 def on_timer():
-    global mCountdown
-    mCountdown = mCountdown -1
-    if (mCountdown > 50 ):
+    global mIdle
+    mIdle = mIdle + 1
+    if (mIdle < 10 ):
         set_brightness(60)
-    elif (mCountdown > 40 ):
+    elif (mIdle < 20 ):
         set_brightness(20)
     else:
         set_backlight(False)
-        ui.tabWidget.hide()
-        Widget.setMouseTracking(True)
 
-        
-        
-mCountdown = 1
+mIdle = 0
 mBrightness = -1
-mBacklight = False
+mBacklight = None
 
     
   
@@ -142,11 +140,12 @@ Widget = QWidget()
 ui = mywidget.Ui_Widget()
 ui.setupUi(Widget)
 
+
 uiLogHandler = UiLogHandler()
 uiLogHandler.setLevel(logging.DEBUG)
 console = logging.StreamHandler()
 console.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+formatter = logging.Formatter('%(name)-8s:%(asctime)-12s %(levelname)-8s %(message)s')
 console.setFormatter(formatter)
 uiLogHandler.setFormatter(formatter)
 
@@ -170,20 +169,25 @@ def addList():
     for groupId in groups:
         group = groups[groupId]
         if len(group['lights']) > 0:
+            recycle = group['recycle']
+            type = group['type']
             name = group['name'] 
             all_on = group['state']['all_on']
             any_on = group['state']['any_on']
-           
-            listItem = QListWidgetItem(ui.listWidget)
-            listItem.setText(name)
-            listItem.setData(Qt.UserRole, groupId)
-            listItem.setFlags(Qt.ItemIsEnabled)
-            if all_on:
-                listItem.setCheckState(Qt.Checked)
-            elif any_on:
-                listItem.setCheckState(Qt.PartiallyChecked)
-            else:
-                listItem.setCheckState(Qt.Unchecked)
+
+            logger.info("Group:" + str(name) + " " + str(groupId))
+            logger.info("Group:" + str(group))
+            if type == 'Room':
+                listItem = QListWidgetItem(ui.listWidget)
+                listItem.setText(name)
+                listItem.setData(Qt.UserRole, groupId)
+                listItem.setFlags(Qt.ItemIsEnabled)
+                if all_on:
+                    listItem.setCheckState(Qt.Checked)
+                elif any_on:
+                    listItem.setCheckState(Qt.PartiallyChecked)
+                else:
+                    listItem.setCheckState(Qt.Unchecked)
             
             
 def refreshList(): 
@@ -214,15 +218,7 @@ ui.bathroomOffButton.clicked.connect(on_bathroom_off)
 ui.exitButton.clicked.connect(on_exit)
 
 
-
-Widget.mouseMoveEvent = myMove
-
 Widget.showFullScreen()
-
-myMove(False)
-
-
-
 
 timer = QTimer()
 timer.setInterval(1000)
@@ -231,5 +227,10 @@ timer.timeout.connect(on_timer)
 timestamp_start = datetime.now()
 timer.start(1000)
 
+Widget.setMouseTracking(True)
+
+
+eventFilter = UiEventFilter()
+app.installEventFilter(eventFilter)
 sys.exit(app.exec_())
 
