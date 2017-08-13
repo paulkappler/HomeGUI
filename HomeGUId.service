@@ -1,0 +1,15 @@
+[Unit]
+Description=HomeGUI d
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/HomeGUI/d.sh
+Restart=on-failure
+RestartSec=480
+KillMode=process
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
