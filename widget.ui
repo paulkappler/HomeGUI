@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>394</height>
+    <width>780</width>
+    <height>471</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -44,7 +44,20 @@
        <string>Control</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0" colspan="2">
+       <item row="0" column="2" rowspan="10">
+        <widget class="QListWidget" name="listWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="mouseTracking">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="2">
         <widget class="QPushButton" name="allOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -60,48 +73,45 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="2" rowspan="4">
-        <widget class="QListWidget" name="listWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="mouseTracking">
-          <bool>true</bool>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="downOffButton">
+         <property name="text">
+          <string>Downstairs Off</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QPushButton" name="bathroomOffButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="mouseTracking">
-          <bool>true</bool>
-         </property>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="hallOnButton">
          <property name="text">
-          <string>Bathroom Off</string>
+          <string>Hall On</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QPushButton" name="bathroomButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="mouseTracking">
-          <bool>true</bool>
-         </property>
+       <item row="6" column="0">
+        <widget class="QPushButton" name="upOffButton">
          <property name="text">
-          <string>Bathroom</string>
+          <string>Upstairs Off</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="downOnButton">
+         <property name="text">
+          <string>Downstairs On</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="downDimButton">
+         <property name="text">
+          <string>Downstairs Dim</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QPushButton" name="hallDimButton">
+         <property name="text">
+          <string>Hall Dim</string>
          </property>
         </widget>
        </item>

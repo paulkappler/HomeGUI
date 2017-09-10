@@ -3,8 +3,10 @@ import sys
 import logging
 import socket
 
-from PyQt5.QtWidgets import QApplication, QWidget, QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QListWidgetItem 
 from PyQt5.QtCore import Qt,QTimer,QObject,QEvent
+from PyQt5.QtGui import QTextCursor
+
 from datetime import datetime
 
 
@@ -32,9 +34,14 @@ class UiEventFilter(QObject):
 class UiLogHandler(logging.Handler):
         
     def emit(self, record):
-        logString = ui.debugText.toPlainText()
-        logString = logString + self.format(record) + "\n"
-        ui.debugText.setPlainText(logString)
+        #logString = ui.debugText.toPlainText()
+        #logString = logString + self.format(record) + "\n"
+        #ui.debugText.setPlainText(logString)
+
+        ui.debugText.moveCursor(QTextCursor.End)
+        ui.debugText.insertPlainText ( self.format(record) + "\n")
+        ui.debugText.moveCursor(QTextCursor.End)
+
 
 
 
@@ -57,6 +64,61 @@ def on_alloff():
     refreshList()
 
 
+def downstairs_on():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "downstairs_on")
+    #b.set_group(11,"on",True)
+    b.run_scene("Kitchen", "First")
+    b.run_scene("Living Room", "Bright")
+    b.run_scene("Dining Room", "Bright")
+   
+    refreshList()
+
+def upstairs_off():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "upstairs_off")
+    b.set_group(1,"on",False)
+    b.set_group(11,"on",False)
+
+    refreshList()
+    
+def downstairs_off():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "downstairs_off")
+    b.set_group(7,"on",False)
+    b.set_group(8,"on",False)
+    b.set_group(9,"on",False)
+
+    refreshList()
+    
+def downstairs_dim():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "downstairs_dim")
+    #b.set_group(11,"on",True)
+    b.run_scene("Kitchen", "Nightlight")
+    b.run_scene("Living Room", "Nightlight")
+    b.run_scene("Dining Room", "Nightlight")
+
+    refreshList()
+    
+
+def hall_on():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "hall_on")
+    #b.set_group(11,"on",True)
+    b.run_scene("Hallway", "Bright")
+    refreshList()
+    
+
+def hall_dim():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "hall_dim")
+    b.run_scene("Hallway", "Nightlight")
+
+    #b.set_group(11,"on",False)
+    refreshList()
+    
+    
 def on_bathroom():
     ui.bathroomButton.setEnabled(False)
     logger = logging.getLogger('HomeGUI')
@@ -164,6 +226,7 @@ b = Bridge("192.168.1.79")
 groups = b.get_group()
 
 
+
 def addList(): 
     groups = b.get_group()
     for groupId in groups:
@@ -213,8 +276,17 @@ addList()
             
 ui.ipValue.setText(get_ip_address())
 ui.allOffButton.clicked.connect(on_alloff)
-ui.bathroomButton.clicked.connect(on_bathroom)
-ui.bathroomOffButton.clicked.connect(on_bathroom_off)
+
+ui.hallOnButton.clicked.connect(hall_on)
+ui.hallDimButton.clicked.connect(hall_dim)
+
+ui.downOnButton.clicked.connect(downstairs_on)
+ui.downOffButton.clicked.connect(downstairs_off)
+ui.downDimButton.clicked.connect(downstairs_dim)
+ui.upOffButton.clicked.connect(upstairs_off)
+
+upstairs_off
+
 ui.exitButton.clicked.connect(on_exit)
 
 
