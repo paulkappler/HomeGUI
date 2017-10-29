@@ -68,7 +68,7 @@ def downstairs_on():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_on")
     #b.set_group(11,"on",True)
-    b.run_scene("Kitchen", "First")
+    b.run_scene("Kitchen", "Bright")
     b.run_scene("Living Room", "Bright")
     b.run_scene("Dining Room", "Bright")
    
@@ -238,7 +238,9 @@ def addList():
             all_on = group['state']['all_on']
             any_on = group['state']['any_on']
 
-            logger.info("Group:" + str(name) + " " + str(groupId))
+            logger.info("Group:" + str(name) )
+            logger.info("Group ID:" + str(groupId))
+
             logger.info("Group:" + str(group))
             if type == 'Room':
                 listItem = QListWidgetItem(ui.listWidget)
