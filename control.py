@@ -54,11 +54,6 @@ def on_alloff():
     ui.allOffButton.setEnabled(False)
     
     b.set_group(0,"on", False)
-    
-    #lights = b.lights
-    #for l in lights:
-    #    print l.name + " " + str(l.on)
-    #    l.on = False
         
     ui.allOffButton.setEnabled(True)
     refreshList()
@@ -85,16 +80,18 @@ def upstairs_off():
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_off")
-    b.set_group(7,"on",False)
-    b.set_group(8,"on",False)
-    b.set_group(9,"on",False)
-
+    b.set_group(2,"on",False) #Little Bathroom
+    b.set_group(4,"on",False) #Garage
+    b.set_group(5,"on",False) #Changing Closet
+    b.set_group(6,"on",False) #Changing Room
+    b.set_group(7,"on",False) #Kitchen
+    b.set_group(8,"on",False) #Dining Room
+    b.set_group(9,"on",False) #Living Room
     refreshList()
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_dim")
-    #b.set_group(11,"on",True)
     b.run_scene("Kitchen", "Nightlight")
     b.run_scene("Living Room", "Nightlight")
     b.run_scene("Dining Room", "Nightlight")
@@ -287,7 +284,7 @@ ui.downOffButton.clicked.connect(downstairs_off)
 ui.downDimButton.clicked.connect(downstairs_dim)
 ui.upOffButton.clicked.connect(upstairs_off)
 
-upstairs_off
+
 
 ui.exitButton.clicked.connect(on_exit)
 
