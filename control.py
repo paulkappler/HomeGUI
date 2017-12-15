@@ -1,4 +1,3 @@
-
 import sys
 import logging
 import socket
@@ -26,8 +25,7 @@ class UiEventFilter(QObject):
                 refreshList()
                 set_backlight(True)
                 set_brightness(60)
-
-        return False
+            return False
 
 
 
@@ -80,21 +78,25 @@ def upstairs_off():
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_off")
-    b.set_group(2,"on",False) #Little Bathroom
-    b.set_group(4,"on",False) #Garage
-    b.set_group(5,"on",False) #Changing Closet
-    b.set_group(6,"on",False) #Changing Room
-    b.set_group(7,"on",False) #Kitchen
-    b.set_group(8,"on",False) #Dining Room
-    b.set_group(9,"on",False) #Living Room
+    #b.set_group(2,"on",False) #Little Bathroom
+    #b.set_group(4,"on",False) #Garage
+    #b.set_group(5,"on",False) #Changing Closet
+    #b.set_group(6,"on",False) #Changing Room
+    #b.set_group(7,"on",False) #Kitchen
+    #b.set_group(8,"on",False) #Dining Room
+    #b.set_group(9,"on",False) #Living Room
+    b.set_group(15,"on",False) #downstairs
     refreshList()
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_dim")
-    b.run_scene("Kitchen", "Nightlight")
-    b.run_scene("Living Room", "Nightlight")
-    b.run_scene("Dining Room", "Nightlight")
+    
+    #b.set_group(15,"on",True) #downstairs
+
+    b.run_scene("Downstairs", "Dim")
+    #b.run_scene("Living Room", "Nightlight")
+    #b.run_scene("Dining Room", "Nightlight")
 
     refreshList()
     
