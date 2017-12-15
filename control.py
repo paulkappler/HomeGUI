@@ -26,6 +26,7 @@ class UiEventFilter(QObject):
                 set_backlight(True)
                 set_brightness(60)
             return False
+        return False
 
 
 
