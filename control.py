@@ -105,7 +105,8 @@ def downstairs_dim():
 def outside_on():
     logger = logging.getLogger('HomeGUI')
     logger.info( "outside_on")
-    b.set_group(10,"on",True) #Outside Front
+    #b.set_group(10,"on",True) #Outside Front
+    b.run_scene("Outside Front", "OutsideBrightest")
 
     refreshList()
 
