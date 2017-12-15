@@ -5,8 +5,8 @@ After=syslog.target network-online.target pigpiod.target
 
 [Service]
 ExecStart=/home/pi/HomeGUI/LightSwitch.py
-User=root
-Group=root
+User=pi
+Group=pi
 
 [Install]
 WantedBy=multi-user.target
