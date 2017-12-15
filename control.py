@@ -99,7 +99,43 @@ def downstairs_dim():
     #b.run_scene("Dining Room", "Nightlight")
 
     refreshList()
+
+
+def outside_on():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "outside_on")
+    b.run_scene("Outside Front", "Bright")
+    refreshList()
+
+def outside_off():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "outside_off")
     
+    b.set_group(10,"on",False) #Outside Front
+    
+    refreshList()
+
+def kitchen_on():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "kitchen_on")
+    b.run_scene("Kitchen", "Brightest")
+    refreshList()
+
+def kitchen_off():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "kitchen_off")
+
+    b.set_group(7,"on",False) #Kitchen
+
+    refreshList()
+
+def kitchen_dim():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "kitchen_dim")
+    b.run_scene("Kitchen", "Nightlight")
+    
+    refreshList()
+
 
 def hall_on():
     logger = logging.getLogger('HomeGUI')
@@ -280,6 +316,14 @@ ui.allOffButton.clicked.connect(on_alloff)
 
 ui.hallOnButton.clicked.connect(hall_on)
 ui.hallDimButton.clicked.connect(hall_dim)
+
+ui.kitOnButton.clicked.connect(kitchen_on)
+ui.kitDimButton.clicked.connect(kitchen_dim)
+ui.kitOffButton.clicked.connect(kitchen_off)
+
+ui.outOnButton.clicked.connect(outside_on)
+ui.outOffButton.clicked.connect(outside_off)
+
 
 ui.downOnButton.clicked.connect(downstairs_on)
 ui.downOffButton.clicked.connect(downstairs_off)
