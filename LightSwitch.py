@@ -4,8 +4,9 @@ import time
 import pigpio
 from phue import Bridge
 
-b = Bridge("192.168.1.79")
+b =  Bridge("192.168.1.79")
 
+b2 = Bridge("192.168.1.78")
 
 pi = pigpio.pi()
 
@@ -20,26 +21,44 @@ u=0
 d=0
 cb = []
 last = [0]*32
+lastCommand = 0
+down = False
+up = False
 
+
+pi.write(2,1)
+pi.write(3,1)
+pi.write(4,1)
+ 
 def cbf(GPIO, level, tick):
+   global down
+   global up
    global u
    global d 
+   global lastCommand
    diff = pigpio.tickDiff(last[GPIO], tick)
    print("G={} l={} t={} d={}".format(GPIO, level, tick, diff)) 
    last[GPIO] = tick
    if diff > 5000:
+      commandDiff = pigpio.tickDiff(lastCommand, tick)
+      lastCommand = tick
       if GPIO == 5:
          if level == 1:
             d = d + 1
             print("DOWN Release", d)
+            down = False
             pi.write(2,1)
             pi.write(3,0)
             pi.write(4,0)
-            b.set_group(11,"on",False) #15 downstairs
-            #b.run_scene("Hallway", "Bright")
+            if commandDiff > 2000000:
+                b.run_scene("Downstairs", "Dim")
+            else:
+                b.set_group(15,"on",False)
+                b2.set_group(0,"on",False)
 
       if level == 0:
             print("DOWN")
+            down = True
             pi.write(2,0)
             pi.write(3,1)
             pi.write(4,0)
@@ -47,6 +66,7 @@ def cbf(GPIO, level, tick):
          if level == 1:
             u = u + 1 
             print("UP Release ",u)
+            up = False
             pi.write(3,0)
             pi.write(4,1)
             pi.write(2,0)
@@ -57,10 +77,12 @@ def cbf(GPIO, level, tick):
             #b.run_scene("Downstairs", "Normal")
          if level == 0:
             print("UP")
+            up = True
             pi.write(2,0)
             pi.write(3,1)
             pi.write(4,0)
-            b.set_group(11,"on", True)
+            #b.set_group(15,"on", True)
+            b.run_scene("Downstairs", "Normal")
 
    
 
@@ -70,7 +92,17 @@ cb.append(pi.callback(6, pigpio.EITHER_EDGE, cbf))
 
 try:
    while True:
-      time.sleep(60)
+      if down:
+          time.sleep(0.1)
+      else:
+          time.sleep(1)
+      tick = pi.get_current_tick()
+      commandDiff = pigpio.tickDiff(lastCommand, tick)
+      if down:
+          if commandDiff > 2000000:
+            pi.write(3,0)
+            pi.write(4,1)
+            pi.write(2,0)
 except KeyboardInterrupt:
    print("\nTidying up")
    for c in cb:
