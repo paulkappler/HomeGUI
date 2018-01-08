@@ -8,7 +8,6 @@ from PyQt5.QtGui import QTextCursor
 
 from datetime import datetime
 
-
 import mywidget
 from phue import Bridge
 
@@ -53,6 +52,7 @@ def on_alloff():
     ui.allOffButton.setEnabled(False)
     
     b.set_group(0,"on", False)
+    b2.set_group(0,"on", False)
         
     ui.allOffButton.setEnabled(True)
     refreshList()
@@ -79,25 +79,17 @@ def upstairs_off():
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_off")
-    #b.set_group(2,"on",False) #Little Bathroom
-    #b.set_group(4,"on",False) #Garage
-    #b.set_group(5,"on",False) #Changing Closet
-    #b.set_group(6,"on",False) #Changing Room
-    #b.set_group(7,"on",False) #Kitchen
-    #b.set_group(8,"on",False) #Dining Room
-    #b.set_group(9,"on",False) #Living Room
     b.set_group(15,"on",False) #downstairs
+    b2.set_group(0,"on",False) #all b2
+
     refreshList()
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_dim")
     
-    #b.set_group(15,"on",True) #downstairs
 
     b.run_scene("Downstairs", "Dim")
-    #b.run_scene("Living Room", "Nightlight")
-    #b.run_scene("Dining Room", "Nightlight")
 
     refreshList()
 
@@ -156,7 +148,6 @@ def hall_dim():
     #b.set_group(11,"on",False)
     refreshList()
     
-    
 def on_bathroom():
     ui.bathroomButton.setEnabled(False)
     logger = logging.getLogger('HomeGUI')
@@ -175,8 +166,6 @@ def on_bathroom_off():
     refreshList()
 
     ui.bathroomOffButton.setEnabled(True)
-
-    
 
 def on_exit():
     logger = logging.getLogger('HomeGUI')
@@ -197,8 +186,6 @@ def set_brightness(light):
         brightness.close()
         logger = logging.getLogger('HomeGUI')
         logger.info("mBrightness:" + str(mBrightness))
-
-
 
 
 def set_backlight(light):
@@ -229,9 +216,7 @@ mIdle = 0
 mBrightness = -1
 mBacklight = None
 
-    
-  
-    
+
 #if __name__ == "__main__":
 
 
@@ -261,6 +246,7 @@ logger.setLevel(logging.DEBUG)
 
 
 b = Bridge("192.168.1.79")
+b2= Bridge("192.168.1.78")
 groups = b.get_group()
 
 
@@ -313,7 +299,6 @@ def refreshList():
         index = index + 1
 addList()
             
-            
 ui.ipValue.setText(get_ip_address())
 ui.allOffButton.clicked.connect(on_alloff)
 
@@ -333,10 +318,7 @@ ui.downOffButton.clicked.connect(downstairs_off)
 ui.downDimButton.clicked.connect(downstairs_dim)
 ui.upOffButton.clicked.connect(upstairs_off)
 
-
-
 ui.exitButton.clicked.connect(on_exit)
-
 
 Widget.showFullScreen()
 
@@ -354,3 +336,4 @@ eventFilter = UiEventFilter()
 app.installEventFilter(eventFilter)
 sys.exit(app.exec_())
 
+import sys
