@@ -214,16 +214,22 @@ def on_room_dim():
 
 
 
-def on_room_normal():
+def on_room_sky():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 333)
+    b.set_group(groupId, "ct", 153)
     
     refreshRoomList()
 
 def on_room_bright():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
     b.set_group(groupId, "ct", 213)
+    
+    refreshRoomList()
 
+def on_room_normal():
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
+    b.set_group(groupId, "ct", 333)
+    
     refreshRoomList()
 
 def on_room_warm():
@@ -235,15 +241,15 @@ def on_room_warm():
 
 def on_room_red():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 500)
+    b.set_group(groupId, {"hue": 0, "sat": 254} )
     
     refreshRoomList()
 
 
 def on_room_blue():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 500)
-    
+    b.set_group(groupId, {"hue": 46920, "sat": 254} )
+
     refreshRoomList()
 
 
@@ -426,6 +432,7 @@ ui.room25Button.clicked.connect(on_room_25)
 ui.room12Button.clicked.connect(on_room_12)
 ui.roomDimButton.clicked.connect(on_room_dim)
 
+ui.roomSkyButton.clicked.connect(on_room_sky)
 ui.roomBrightButton.clicked.connect(on_room_bright)
 ui.roomNormalButton.clicked.connect(on_room_normal)
 ui.roomRedButton.clicked.connect(on_room_red)
