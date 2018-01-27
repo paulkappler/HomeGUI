@@ -243,27 +243,11 @@ On</string>
      </widget>
      <widget class="QWidget" name="tabRoom">
       <attribute name="title">
-       <string>Page</string>
+       <string>Rooms</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="1" column="0" rowspan="4">
-        <widget class="QListWidget" name="listWidgetRoom"/>
-       </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="roomOnButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -271,9 +255,25 @@ On</string>
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>On</string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="roomOffButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="2">
+        <widget class="QListWidget" name="listWidgetRoom"/>
        </item>
       </layout>
      </widget>

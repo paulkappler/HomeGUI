@@ -167,6 +167,17 @@ def on_bathroom_off():
 
     ui.bathroomOffButton.setEnabled(True)
 
+
+def on_room_off():
+    groupId = ui.listWidgetRoom.currentItem.data(Qt.UserRole)
+    b.set_group(groupId,"on",False)
+
+
+def on_room_on:
+    groupId = ui.listWidgetRoom.currentItem.data(Qt.UserRole)
+    b.set_group(groupId,"on",True)
+
+
 def on_exit():
     logger = logging.getLogger('HomeGUI')
     logger.info("Exit Button"  )
@@ -316,6 +327,10 @@ ui.downOnButton.clicked.connect(downstairs_on)
 ui.downOffButton.clicked.connect(downstairs_off)
 ui.downDimButton.clicked.connect(downstairs_dim)
 ui.upOffButton.clicked.connect(upstairs_off)
+
+ui.roomOffButton.clicked.connect(on_room_off)
+ui.roomOnButton.clicked.connect(on_room_on)
+
 
 ui.exitButton.clicked.connect(on_exit)
 
