@@ -173,7 +173,7 @@ def on_room_off():
     b.set_group(groupId,"on",False)
 
 
-def on_room_on:
+def on_room_on():
     groupId = ui.listWidgetRoom.currentItem.data(Qt.UserRole)
     b.set_group(groupId,"on",True)
 
