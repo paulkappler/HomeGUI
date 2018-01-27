@@ -252,7 +252,7 @@ groups = b.get_group()
 def addRoomList(listItem, name, groupId, all_on, any_on):
     listItem.setText(name)
     listItem.setData(Qt.UserRole, groupId)
-    listItem.setFlags(Qt.ItemIsEnabled)
+    listItem.setFlags(Qt.ItemIsEnabled | Qt::ItemIsSelectable)
     if all_on:
         listItem.setCheckState(Qt.Checked)
     elif any_on:
