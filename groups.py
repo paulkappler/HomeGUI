@@ -5,6 +5,9 @@ from phue import Bridge
 
 b = Bridge("192.168.1.79")
 
+b2= Bridge("192.168.1.78")
+
+
 formatter = logging.Formatter('%(name)-8s:%(asctime)-12s %(levelname)-8s %(message)s')
 
 console = logging.StreamHandler()
