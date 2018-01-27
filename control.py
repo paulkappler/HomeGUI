@@ -172,10 +172,14 @@ def on_room_off():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
     b.set_group(groupId,"on",False)
 
+    refreshRoomList()
+
 
 def on_room_on():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
     b.set_group(groupId,"on",True)
+
+    refreshRoomList()
 
 
 def on_exit():
@@ -307,6 +311,27 @@ def refreshList():
         else:
             listItem.setCheckState(Qt.Unchecked)
         index = index + 1
+
+def refreshRoomList():
+    groups = b.get_group()
+    count = ui.listWidgetRoom.count()
+    index = 0
+    while index < count:
+        listItem = ui.listWidgetRoom.item(index)
+        groupId = listItem.data(Qt.UserRole)
+        group = groups[groupId]
+        listItem.setText(group['name'])
+        all_on = group['state']['all_on']
+        any_on = group['state']['any_on']
+        if all_on:
+            listItem.setCheckState(Qt.Checked)
+        elif any_on:
+            listItem.setCheckState(Qt.PartiallyChecked)
+        else:
+            listItem.setCheckState(Qt.Unchecked)
+        index = index + 1
+
+
 addList()
             
 ui.ipValue.setText(get_ip_address())
