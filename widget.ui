@@ -352,7 +352,7 @@ On</string>
         </widget>
        </item>
        <item row="13" column="2">
-        <widget class="QPushButton" name="roomWarm">
+        <widget class="QPushButton" name="roomWarmButton">
          <property name="text">
           <string>Warm</string>
          </property>
