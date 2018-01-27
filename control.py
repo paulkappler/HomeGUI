@@ -249,7 +249,16 @@ b = Bridge("192.168.1.79")
 b2= Bridge("192.168.1.78")
 groups = b.get_group()
 
-
+def addRoomList(listItem, name, groupId, all_on, any_on):
+    listItem.setText(name)
+    listItem.setData(Qt.UserRole, groupId)
+    listItem.setFlags(Qt.ItemIsEnabled)
+    if all_on:
+        listItem.setCheckState(Qt.Checked)
+    elif any_on:
+        listItem.setCheckState(Qt.PartiallyChecked)
+    else:
+        listItem.setCheckState(Qt.Unchecked)
 
 def addList(): 
     groups = b.get_group()
@@ -262,22 +271,9 @@ def addList():
             all_on = group['state']['all_on']
             any_on = group['state']['any_on']
 
-            logger.info("Group:" + str(name) )
-            logger.info("Group ID:" + str(groupId))
-
-            logger.info("Group:" + str(group))
             if type == 'Room':
                 listItem = QListWidgetItem(ui.listWidget)
-                listItem.setText(name)
-                listItem.setData(Qt.UserRole, groupId)
-                listItem.setFlags(Qt.ItemIsEnabled)
-                if all_on:
-                    listItem.setCheckState(Qt.Checked)
-                elif any_on:
-                    listItem.setCheckState(Qt.PartiallyChecked)
-                else:
-                    listItem.setCheckState(Qt.Unchecked)
-            
+                addRoomList(listItem, name, groupId, all_on, any_on)
             
 def refreshList(): 
     groups = b.get_group()
