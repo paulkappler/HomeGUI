@@ -274,6 +274,9 @@ def addList():
             if type == 'Room':
                 listItem = QListWidgetItem(ui.listWidget)
                 addRoomList(listItem, name, groupId, all_on, any_on)
+                listItem = QListWidgetItem(ui.listWidgetRoom)
+                addRoomList(listItem, name, groupId, all_on, any_on)
+
             
 def refreshList(): 
     groups = b.get_group()
