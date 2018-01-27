@@ -233,6 +233,19 @@ def on_room_warm():
     refreshRoomList()
 
 
+def on_room_red():
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
+    b.set_group(groupId, "ct", 500)
+    
+    refreshRoomList()
+
+
+def on_room_blue():
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
+    b.set_group(groupId, "ct", 500)
+    
+    refreshRoomList()
+
 
 def on_exit():
     logger = logging.getLogger('HomeGUI')
