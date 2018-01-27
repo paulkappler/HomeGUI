@@ -207,9 +207,32 @@ def on_room_12():
 
 def on_room_dim():
     groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"bri",0)
+    b.set_group(groupId,"bri",1)
     
     refreshRoomList()
+
+
+
+
+def on_room_normal():
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
+    b.set_group(groupId, "ct", 333)
+    
+    refreshRoomList()
+
+def on_room_bright():
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
+    b.set_group(groupId, "ct", 213)
+
+    refreshRoomList()
+
+def on_room_warm():
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
+    b.set_group(groupId, "ct", 500)
+    
+    refreshRoomList()
+
+
 
 def on_exit():
     logger = logging.getLogger('HomeGUI')
@@ -389,6 +412,12 @@ ui.room50Button.clicked.connect(on_room_50)
 ui.room25Button.clicked.connect(on_room_25)
 ui.room12Button.clicked.connect(on_room_12)
 ui.roomDimButton.clicked.connect(on_room_dim)
+
+ui.roomBrightButton.clicked.connect(on_room_bright)
+ui.roomNormalButton.clicked.connect(on_room_normal)
+ui.roomRedButton.clicked.connect(on_room_red)
+ui.roomBlueButton.clicked.connect(on_room_blue)
+ui.roomOrangeButton.clicked.connect(on_room_orange)
 
 
 ui.exitButton.clicked.connect(on_exit)
