@@ -417,7 +417,7 @@ ui.roomBrightButton.clicked.connect(on_room_bright)
 ui.roomNormalButton.clicked.connect(on_room_normal)
 ui.roomRedButton.clicked.connect(on_room_red)
 ui.roomBlueButton.clicked.connect(on_room_blue)
-ui.roomOrangeButton.clicked.connect(on_room_orange)
+ui.roomWarmButton.clicked.connect(on_room_warm)
 
 
 ui.exitButton.clicked.connect(on_exit)
