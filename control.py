@@ -169,12 +169,12 @@ def on_bathroom_off():
 
 
 def on_room_off():
-    groupId = ui.listWidgetRoom.currentItem().data(Qt.UserRole)
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
     b.set_group(groupId,"on",False)
 
 
 def on_room_on():
-    groupId = ui.listWidgetRoom.currentItem().data(Qt.UserRole)
+    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
     b.set_group(groupId,"on",True)
 
 
