@@ -330,14 +330,18 @@ logger.addHandler(console)
 logger.addHandler(uiLogHandler)
 logger.setLevel(logging.DEBUG)
 
+bridges = {}
 
 b = Bridge("192.168.1.79")
 b2= Bridge("192.168.1.78")
+bridges[0] = b
+bridges[1] = b2
 
-def addRoomList(listItem, name, group, groupId, all_on, any_on):
+
+def addRoomList(listItem, name, bridgeId, groupId, all_on, any_on):
     listItem.setText(name)
     listItem.setData(Qt.UserRole, groupId)
-    listItem.setData(Qt.UserRole+1, group)
+    listItem.setData(Qt.UserRole+1, bridgeId)
 
     listItem.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
     if all_on:
@@ -347,32 +351,35 @@ def addRoomList(listItem, name, group, groupId, all_on, any_on):
     else:
         listItem.setCheckState(Qt.Unchecked)
 
-def addList(): 
-    groups = b.get_group()
-    for groupId in groups:
-        group = groups[groupId]
-        if len(group['lights']) > 0:
-            recycle = group['recycle']
-            type = group['type']
-            name = group['name'] 
-            all_on = group['state']['all_on']
-            any_on = group['state']['any_on']
+def addList():
+    for bridgeId in bridges:
+        bridge = bridges[bridgeId]
+        groups = bridge.get_group()
+        for groupId in groups:
+            group = groups[groupId]
+            if len(group['lights']) > 0:
+                recycle = group['recycle']
+                type = group['type']
+                name = group['name']
+                all_on = group['state']['all_on']
+                any_on = group['state']['any_on']
 
-            if type == 'Room':
-                listItem = QListWidgetItem(ui.listWidget)
-                addRoomList(listItem, name, group, groupId, all_on, any_on)
-                listItem = QListWidgetItem(ui.listWidgetRoom)
-                addRoomList(listItem, name, group, groupId, all_on, any_on)
-
+                if type == 'Room':
+                    listItem = QListWidgetItem(ui.listWidget)
+                    addRoomList(listItem, name, bridgeId, groupId, all_on, any_on)
+                    listItem = QListWidgetItem(ui.listWidgetRoom)
+                    addRoomList(listItem, name, bridgeId, groupId, all_on, any_on)
             
 def refreshList(): 
-    groups = b.get_group()
     count = ui.listWidget.count()
     index = 0
     while index < count:
         listItem = ui.listWidget.item(index)
         groupId = listItem.data(Qt.UserRole)
-        group = listItem.data(Qt.UserRole + 1)
+        bridgeId = listItem.data(Qt.UserRole + 1)
+        bridge = bridges[bridgeId]
+        group = bridge.get_group(groupId)
+
         listItem.setText(group['name'])
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
