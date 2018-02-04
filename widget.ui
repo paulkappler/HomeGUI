@@ -248,6 +248,12 @@ Off</string>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="1" column="0" rowspan="18">
         <widget class="QListWidget" name="listWidgetRoom">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>6</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
            <pointsize>16</pointsize>
@@ -360,15 +366,11 @@ Off</string>
        </item>
        <item row="1" column="1" rowspan="17">
         <widget class="QSlider" name="verticalSlider">
-         <property name="styleSheet">
-          <string notr="true">QSlider::handle
-{
-    background: white;
-    border: 3px solid black;
-    width: 60px; // **Change the width here**
-    margin: -30px 0;
-}
-</string>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="minimum">
           <number>0</number>
