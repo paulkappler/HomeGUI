@@ -187,31 +187,31 @@ def on_room_on():
 
 def on_room_100():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId,{"on": True,"bri",254})
+    bridge.set_group(groupId,{"on": True,"bri":254})
     
     refreshRoomList()
 
 def on_room_50():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId,{"on": True,"bri",128})
+    bridge.set_group(groupId,{"on": True,"bri":128})
     
     refreshRoomList()
 
 def on_room_25():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId,{"on": True,"bri",64})
+    bridge.set_group(groupId,{"on": True,"bri":64})
     
     refreshRoomList()
 
 def on_room_12():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId,{"on": True,"bri",32})
+    bridge.set_group(groupId,{"on": True,"bri":32})
     
     refreshRoomList()
 
 def on_room_dim():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId,{"on": True,"bri",1})
+    bridge.set_group(groupId,{"on": True,"bri":1})
     
     refreshRoomList()
 
@@ -220,25 +220,25 @@ def on_room_dim():
 
 def on_room_sky():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId, {"on": True, "ct", 153} )
+    bridge.set_group(groupId, {"on": True, "ct": 153} )
     
     refreshRoomList()
 
 def on_room_bright():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId, {"on": True, "ct", 213} )
+    bridge.set_group(groupId, {"on": True, "ct": 213} )
     
     refreshRoomList()
 
 def on_room_normal():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId, {"on": True, "ct", 333} )
+    bridge.set_group(groupId, {"on": True, "ct": 333} )
     
     refreshRoomList()
 
 def on_room_warm():
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId, {"on": True, "ct", 500} )
+    bridge.set_group(groupId, {"on": True, "ct": 500} )
     
     refreshRoomList()
 
