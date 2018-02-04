@@ -367,7 +367,7 @@ Off</string>
        <item row="1" column="1" rowspan="17">
         <widget class="QSlider" name="verticalSlider">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>1</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -378,7 +378,7 @@ Off</string>
     border-radius: 5px;
 	border-color: rgb(0, 0, 0);
     height: 10px;
-    margin: -4px -4px; /* expand outside the groove */
+    margin: -4px -4px; 
 }</string>
          </property>
          <property name="minimum">
