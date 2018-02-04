@@ -377,7 +377,8 @@ Off</string>
     background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #222222, stop:1 #CCCCCC);
     border-radius: 5px;
 	border-color: rgb(0, 0, 0);
-
+    height: 10px;
+    margin: -4px -4px; /* expand outside the groove */
 }</string>
          </property>
          <property name="minimum">
