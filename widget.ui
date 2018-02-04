@@ -34,7 +34,7 @@
       <bool>true</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabControl">
       <property name="mouseTracking">
@@ -360,6 +360,16 @@ Off</string>
        </item>
        <item row="1" column="1" rowspan="17">
         <widget class="QSlider" name="verticalSlider">
+         <property name="styleSheet">
+          <string notr="true">QSlider::handle
+{
+    background: white;
+    border: 3px solid black;
+    width: 60px; // **Change the width here**
+    margin: -30px 0;
+}
+</string>
+         </property>
          <property name="minimum">
           <number>0</number>
          </property>
