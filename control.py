@@ -375,8 +375,8 @@ def refreshList():
     index = 0
     while index < count:
         listItem = ui.listWidget.item(index)
-        groupId = listItem.data(Qt.UserRole)
-        bridgeId = listItem.data(Qt.UserRole + 1)
+        groupId = int(listItem.data(Qt.UserRole))
+        bridgeId = int(listItem.data(Qt.UserRole + 1))
         bridge = bridges[bridgeId]
         group = bridge.get_group(groupId)
 
@@ -397,8 +397,8 @@ def refreshRoomList():
     index = 0
     while index < count:
         listItem = ui.listWidgetRoom.item(index)
-        groupId = listItem.data(Qt.UserRole)
-        bridgeId = listItem.data(Qt.UserRole + 1)
+        groupId = int(listItem.data(Qt.UserRole))
+        bridgeId = int(listItem.data(Qt.UserRole + 1))
         bridge = bridges[bridgeId]
         group = bridge.get_group(groupId)
 
