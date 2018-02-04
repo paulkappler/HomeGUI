@@ -88,7 +88,6 @@ def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_dim")
     
-
     b.run_scene("Downstairs", "Dim")
 
     refreshList()
@@ -96,9 +95,8 @@ def downstairs_dim():
 
 def outside_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "outside_on")
-    #b.set_group(10,"on",True) #Outside Front
-    b.run_scene("Outside Front", "OutsideBrightest")
+    logger.info( "OutsideBrightest")
+    b.run_scene("Outside", "OutsideBrightest")
 
     refreshList()
 
@@ -106,7 +104,7 @@ def outside_off():
     logger = logging.getLogger('HomeGUI')
     logger.info( "outside_off")
     
-    b.set_group(10,"on",False) #Outside Front
+    b.set_group(10,"on",False) #Outside
     
     refreshList()
 
@@ -167,47 +165,53 @@ def on_bathroom_off():
 
     ui.bathroomOffButton.setEnabled(True)
 
+def get_room_selection():
+    listItem = ui.listWidgetRoom.currentItem()
+    groupId = int(listItem.data(Qt.UserRole))
+    bridgeId = int(listItem.data(Qt.UserRole + 1))
+    bridge = bridges[bridgeId]
+    return bridge, groupId
 
 def on_room_off():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"on",False)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"on",False)
 
     refreshRoomList()
 
 
 def on_room_on():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"on",True)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"on",True)
 
     refreshRoomList()
 
 def on_room_100():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"bri",254)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"bri",254)
     
     refreshRoomList()
 
 def on_room_50():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"bri",128)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"bri",128)
     
     refreshRoomList()
 
 def on_room_25():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"bri",64)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"bri",64)
     
     refreshRoomList()
 
 def on_room_12():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"bri",32)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"bri",32)
     
     refreshRoomList()
 
 def on_room_dim():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId,"bri",1)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"bri",1)
     
     refreshRoomList()
 
@@ -215,40 +219,40 @@ def on_room_dim():
 
 
 def on_room_sky():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 153)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId, "ct", 153)
     
     refreshRoomList()
 
 def on_room_bright():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 213)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId, "ct", 213)
     
     refreshRoomList()
 
 def on_room_normal():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 333)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId, "ct", 333)
     
     refreshRoomList()
 
 def on_room_warm():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, "ct", 500)
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId, "ct", 500)
     
     refreshRoomList()
 
 
 def on_room_red():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, {"hue": 0, "sat": 254} )
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId, {"on": True, "hue": 0, "sat": 254} )
     
     refreshRoomList()
 
 
 def on_room_blue():
-    groupId = int(ui.listWidgetRoom.currentItem().data(Qt.UserRole))
-    b.set_group(groupId, {"hue": 46920, "sat": 254} )
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId, {"on": True, hue": 46920, "sat": 254} )
 
     refreshRoomList()
 
@@ -260,7 +264,7 @@ def on_exit():
     
 def on_reset():
     logger = logging.getLogger('HomeGUI')
-    logger.info("reset Button"  )
+    logger.info("reset Button")
     sys.exit(0)
     
 def set_brightness(light):
@@ -392,7 +396,6 @@ def refreshList():
         index = index + 1
 
 def refreshRoomList():
-    groups = b.get_group()
     count = ui.listWidgetRoom.count()
     index = 0
     while index < count:
