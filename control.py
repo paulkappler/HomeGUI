@@ -333,11 +333,12 @@ logger.setLevel(logging.DEBUG)
 
 b = Bridge("192.168.1.79")
 b2= Bridge("192.168.1.78")
-groups = b.get_group()
 
-def addRoomList(listItem, name, groupId, all_on, any_on):
+def addRoomList(listItem, name, group, groupId, all_on, any_on):
     listItem.setText(name)
     listItem.setData(Qt.UserRole, groupId)
+    listItem.setData(Qt.UserRole+1, group)
+
     listItem.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
     if all_on:
         listItem.setCheckState(Qt.Checked)
@@ -359,9 +360,9 @@ def addList():
 
             if type == 'Room':
                 listItem = QListWidgetItem(ui.listWidget)
-                addRoomList(listItem, name, groupId, all_on, any_on)
+                addRoomList(listItem, name, group, groupId, all_on, any_on)
                 listItem = QListWidgetItem(ui.listWidgetRoom)
-                addRoomList(listItem, name, groupId, all_on, any_on)
+                addRoomList(listItem, name, group, groupId, all_on, any_on)
 
             
 def refreshList(): 
@@ -371,7 +372,7 @@ def refreshList():
     while index < count:
         listItem = ui.listWidget.item(index)
         groupId = listItem.data(Qt.UserRole)
-        group = groups[groupId]
+        group = listItem.data(Qt.UserRole + 1)
         listItem.setText(group['name'])
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
@@ -390,7 +391,7 @@ def refreshRoomList():
     while index < count:
         listItem = ui.listWidgetRoom.item(index)
         groupId = listItem.data(Qt.UserRole)
-        group = groups[groupId]
+        group = listItem.data(Qt.UserRole + 1)
         listItem.setText(group['name'])
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
