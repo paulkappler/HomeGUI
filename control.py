@@ -398,7 +398,10 @@ def refreshRoomList():
     while index < count:
         listItem = ui.listWidgetRoom.item(index)
         groupId = listItem.data(Qt.UserRole)
-        group = listItem.data(Qt.UserRole + 1)
+        bridgeId = listItem.data(Qt.UserRole + 1)
+        bridge = bridges[bridgeId]
+        group = bridge.get_group(groupId)
+
         listItem.setText(group['name'])
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
