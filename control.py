@@ -268,14 +268,16 @@ def on_room_slider(value):
         logger.info("timer active  value:" + str(value) )
     else:
         result = roomBridge.set_group(roomGroupId,"bri",value,transitiontime=1)
-        slidetimer.start(1000)
-        logger.info("room slider value" + str(value) +  "groupID" + str(roomGroupId) + str(result) )
+        slidetimer.start(400)
+        logger.info("room slider value" + str(value) + str(result) )
 
 def on_slidetimer():
     global roomBridge, roomGroupId
     global roomValue, sliderDelay
     if sliderDelay:
         result = roomBridge.set_group(roomGroupId,"bri",value,transitiontime=1)
+        logger.info("room slider timer value" + str(value) + str(result) )
+
 
 
 def on_exit():
