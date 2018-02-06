@@ -257,11 +257,23 @@ def on_room_blue():
     refreshRoomList()
 
 def on_room_slider(value):
-    bridge, groupId = get_room_selection()
-    result = bridge.set_group(groupId,"bri",value,transitiontime=0)
-    
-    logger = logging.getLogger('HomeGUI')
-    logger.info("room slider value" + str(value) +  "groupID" + str(groupId) + str(result) )
+    global roomBridge, roomGroupId
+    global roomValue, sliderDelay
+    roomBridge, roomGroupId = get_room_selection()
+    if slidetimer.isActive():
+        roomValue = value
+        sliderDelay = True
+    else:
+        result = roomBridge.set_group(roomGroupId,"bri",value,transitiontime=1)
+        slidetimer.start(1000)
+        logger = logging.getLogger('HomeGUI')
+        logger.info("room slider value" + str(value) +  "groupID" + str(roomGroupId) + str(result) )
+
+def on_slidetimer:
+    global roomBridge, roomGroupId
+    global roomValue, sliderDelay
+    if sliderDelay:
+        result = roomBridge.set_group(roomGroupId,"bri",value,transitiontime=1)
 
 
 def on_exit():
@@ -466,6 +478,12 @@ ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
 ui.exitButton.clicked.connect(on_exit)
 
 Widget.showFullScreen()
+
+slidetimer = QTimer()
+slidetimer.setInterval(1500)
+slidetimer.setTimerType(Qt.PreciseTimer)
+slidetimer.timeout.connect(on_slidetimer)
+slidetimer.setSingleShot(True)
 
 timer = QTimer()
 timer.setInterval(1000)
