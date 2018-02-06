@@ -246,7 +246,97 @@ Off</string>
        <string>Rooms</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="1" column="0" rowspan="18">
+       <item row="13" column="4">
+        <widget class="QPushButton" name="roomBlueButton">
+         <property name="text">
+          <string>Blue</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="4">
+        <widget class="QPushButton" name="roomRedButton">
+         <property name="text">
+          <string>Red</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QPushButton" name="room50Button">
+         <property name="text">
+          <string>50%</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="4">
+        <widget class="QPushButton" name="roomDimButton">
+         <property name="text">
+          <string>Dim</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QPushButton" name="room12Button">
+         <property name="text">
+          <string>12%</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="room100Button">
+         <property name="text">
+          <string>100%</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QPushButton" name="room25Button">
+         <property name="text">
+          <string>25%</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" rowspan="7">
+        <widget class="QPushButton" name="roomOnButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="4">
+        <widget class="QPushButton" name="roomSkyButton">
+         <property name="text">
+          <string>Sky</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="4">
+        <widget class="QPushButton" name="roomBrightButton">
+         <property name="text">
+          <string>Bright</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="4">
+        <widget class="QPushButton" name="roomNormalButton">
+         <property name="text">
+          <string>Normal</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="4">
+        <widget class="QPushButton" name="roomWarmButton">
+         <property name="text">
+          <string>Warm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="15">
         <widget class="QListWidget" name="listWidgetRoom">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -261,56 +351,7 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="room50Button">
-         <property name="text">
-          <string>50%</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QPushButton" name="roomDimButton">
-         <property name="text">
-          <string>Dim</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <widget class="QPushButton" name="room12Button">
-         <property name="text">
-          <string>12%</string>
-         </property>
-        </widget>
-       </item>
-       <item row="14" column="3">
-        <widget class="QPushButton" name="roomBlueButton">
-         <property name="text">
-          <string>Blue</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="room100Button">
-         <property name="text">
-          <string>100%</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QPushButton" name="room25Button">
-         <property name="text">
-          <string>25%</string>
-         </property>
-        </widget>
-       </item>
-       <item row="15" column="3">
-        <widget class="QPushButton" name="roomRedButton">
-         <property name="text">
-          <string>Red</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="2" rowspan="11">
+       <item row="8" column="3" rowspan="7">
         <widget class="QPushButton" name="roomOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -323,49 +364,8 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2" rowspan="7">
-        <widget class="QPushButton" name="roomOnButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>On</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="3">
-        <widget class="QPushButton" name="roomSkyButton">
-         <property name="text">
-          <string>Sky</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="3">
-        <widget class="QPushButton" name="roomBrightButton">
-         <property name="text">
-          <string>Bright</string>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="3">
-        <widget class="QPushButton" name="roomNormalButton">
-         <property name="text">
-          <string>Normal</string>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="3">
-        <widget class="QPushButton" name="roomWarmButton">
-         <property name="text">
-          <string>Warm</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" rowspan="17">
-        <widget class="QSlider" name="verticalSlider">
+       <item row="1" column="2" rowspan="15">
+        <widget class="QSlider" name="roomVerticalSlider">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>1</horstretch>
@@ -374,20 +374,23 @@ Off</string>
          </property>
          <property name="styleSheet">
           <string notr="true">QSlider::handle{
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #222222, stop:1 #CCCCCC);
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #111111, stop:1 #CCCCCC);
     border-radius: 5px;
-	border-color: rgb(0, 0, 0);
-    height: 30px;
-    width: 30px;
+	border-color: #000000;
 
-    margin: -20px -20px; 
+    border-width: 1px;
+    border-style: solid;
+    height: 30px;
+    width: 10px;
+
+    margin: 5px 5px; 
 }
 
 QSlider::groove
 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #222222, stop:1 #CCCCCC);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: qlineargradient(x1:.5, y1:0, x2:.5, y2:1, stop:0 #999999, stop:1 #FFFFFF);
 
 }  
 </string>
