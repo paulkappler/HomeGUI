@@ -256,6 +256,11 @@ def on_room_blue():
 
     refreshRoomList()
 
+def on_room_slider(value):
+    bridge, groupId = get_room_selection()
+    bridge.set_group(groupId,"bri",value,transitiontime=0)
+
+
 
 def on_exit():
     logger = logging.getLogger('HomeGUI')
@@ -290,6 +295,8 @@ def set_backlight(light):
         bl_power.close()
         logger = logging.getLogger('HomeGUI')
         logger.info("mBacklight:" + str(mBacklight))
+
+
 
 
 def on_timer():
@@ -452,7 +459,7 @@ ui.roomNormalButton.clicked.connect(on_room_normal)
 ui.roomRedButton.clicked.connect(on_room_red)
 ui.roomBlueButton.clicked.connect(on_room_blue)
 ui.roomWarmButton.clicked.connect(on_room_warm)
-
+ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
 
 ui.exitButton.clicked.connect(on_exit)
 
