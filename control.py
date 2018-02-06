@@ -258,8 +258,10 @@ def on_room_blue():
 
 def on_room_slider(value):
     bridge, groupId = get_room_selection()
-    bridge.set_group(groupId,"bri",value,transitiontime=0)
-
+    result = bridge.set_group(groupId,"bri",value,transitiontime=0)
+    
+    logger = logging.getLogger('HomeGUI')
+    logger.info("room slider value" + str(value) +  "groupID" + str(groupId) + str(result) )
 
 
 def on_exit():
