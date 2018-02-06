@@ -257,16 +257,19 @@ def on_room_blue():
     refreshRoomList()
 
 def on_room_slider(value):
+    logger = logging.getLogger('HomeGUI')
+
     global roomBridge, roomGroupId
     global roomValue, sliderDelay
     roomBridge, roomGroupId = get_room_selection()
     if slidetimer.isActive():
         roomValue = value
         sliderDelay = True
+        logger.info("timer active  value:" + str(value) )
+
     else:
         result = roomBridge.set_group(roomGroupId,"bri",value,transitiontime=1)
         slidetimer.start(1000)
-        logger = logging.getLogger('HomeGUI')
         logger.info("room slider value" + str(value) +  "groupID" + str(roomGroupId) + str(result) )
 
 def on_slidetimer:
