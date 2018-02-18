@@ -421,8 +421,6 @@ def refreshList():
             listItem.setCheckState(Qt.Unchecked)
         index = index + 1
 
-    r = requests.get("https://autodiscover.kappler.us/internet_test/id/2")
-    ui.label_2.setText(r.text)
 
 def refreshRoomList():
     count = ui.listWidgetRoom.count()
@@ -485,6 +483,8 @@ ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
 
 ui.exitButton.clicked.connect(on_exit)
 
+
+
 Widget.showFullScreen()
 
 slidetimer = QTimer()
@@ -505,6 +505,13 @@ Widget.setMouseTracking(True)
 
 eventFilter = UiEventFilter()
 app.installEventFilter(eventFilter)
+
+r = requests.get("https://autodiscover.kappler.us/internet_test/id/2")
+ui.label_2.setText(r.text)
+
+r = requests.get("https://autodiscover.kappler.us/internet_test/id/1")
+ui.label_4.setText(r.text)
+
 sys.exit(app.exec_())
 
 import sys
