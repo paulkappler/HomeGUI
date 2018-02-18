@@ -138,7 +138,14 @@ def hall_on():
     #b.set_group(11,"on",True)
     b.run_scene("Hallway", "Bright")
     refreshList()
+
+
+def hall_off():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "hall_off")
+    b.set_group(11,"on",False) #Hall?
     
+    refreshList()
 
 def hall_dim():
     logger = logging.getLogger('HomeGUI')
@@ -451,6 +458,7 @@ ui.allOffButton.clicked.connect(on_alloff)
 
 ui.hallOnButton.clicked.connect(hall_on)
 ui.hallDimButton.clicked.connect(hall_dim)
+ui.hallOffButton.clicked.connect(hall_off)
 
 ui.kitOnButton.clicked.connect(kitchen_on)
 ui.kitDimButton.clicked.connect(kitchen_dim)
