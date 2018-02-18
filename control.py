@@ -1,6 +1,8 @@
 import sys
 import logging
 import socket
+import requests
+
 
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidgetItem 
 from PyQt5.QtCore import Qt,QTimer,QObject,QEvent
@@ -418,6 +420,9 @@ def refreshList():
         else:
             listItem.setCheckState(Qt.Unchecked)
         index = index + 1
+
+    r = requests.get("https://autodiscover.kappler.us/internet_test/id/2")
+    ui.label_2.setText(r.text)
 
 def refreshRoomList():
     count = ui.listWidgetRoom.count()
