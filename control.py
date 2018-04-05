@@ -379,11 +379,10 @@ bridge_groups={}
 def refreshBridgeGroups():
     for bridgeId in bridges:
         bridge = bridges[bridgeId]
-        bridge_groups[bridgeId] = bridge.get_group()
-
-    logger = logging.getLogger('HomeGUI')
-    logger.info( str(bridge_groups) )
-
+        groups = bridge.get_group()
+        for groupId in groups:
+            group = groups[groupId]
+            bridge_groups[bridgeId][int(groupId)] = group
 
 refreshBridgeGroups()
 
