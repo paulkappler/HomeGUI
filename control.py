@@ -381,6 +381,10 @@ def refreshBridgeGroups():
         bridge = bridges[bridgeId]
         bridge_groups[bridgeId] = bridge.get_group()
 
+    logger = logging.getLogger('HomeGUI')
+    logger.info( str(bridge_groups) )
+
+
 refreshBridgeGroups()
 
 def addRoomList(listItem, name, bridgeId, groupId, all_on, any_on):
