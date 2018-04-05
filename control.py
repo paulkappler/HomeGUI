@@ -374,6 +374,18 @@ b2= Bridge("192.168.1.78")
 bridges[0] = b
 bridges[1] = b2
 
+bridge_groups={}
+
+def refreshBridgeGroups():
+    bridge_groups={}
+    for bridgeId in bridges:
+        bridge = bridges[bridgeId]
+        groups = bridge.get_group()
+        bridge_groups[bridgeId] = {}
+        for groupId in groups:
+            bridge_groups[bridgeId][groupId] = groups[groupId]
+
+refreshBridgeGroups()
 
 def addRoomList(listItem, name, bridgeId, groupId, all_on, any_on):
     listItem.setText(name)
@@ -410,12 +422,14 @@ def addList():
 def refreshList(): 
     count = ui.listWidget.count()
     index = 0
+    refreshBridgeGroups()
+    
     while index < count:
         listItem = ui.listWidget.item(index)
         groupId = int(listItem.data(Qt.UserRole))
         bridgeId = int(listItem.data(Qt.UserRole + 1))
         bridge = bridges[bridgeId]
-        group = bridge.get_group(groupId)
+        group = bridge_groups[bridgeId][groupId]
 
         listItem.setText(group['name'])
         all_on = group['state']['all_on']
