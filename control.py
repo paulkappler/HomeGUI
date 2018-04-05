@@ -385,7 +385,8 @@ def refreshBridgeGroups():
         groups = bridge.get_group()
         for groupIdStr in groups:
             group = groups[groupIdStr]
-            bridge_groups[bridgeId][int(groupId)] = group
+            groupId = int(groupIdStr)
+            bridge_groups[bridgeId][groupId] = group
 
 refreshBridgeGroups()
 
