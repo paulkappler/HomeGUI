@@ -377,13 +377,9 @@ bridges[1] = b2
 bridge_groups={}
 
 def refreshBridgeGroups():
-    bridge_groups={}
     for bridgeId in bridges:
         bridge = bridges[bridgeId]
-        groups = bridge.get_group()
-        bridge_groups[bridgeId] = {}
-        for groupId in groups:
-            bridge_groups[bridgeId][groupId] = groups[groupId]
+        bridge_groups[bridgeId] = bridge.get_group()
 
 refreshBridgeGroups()
 
