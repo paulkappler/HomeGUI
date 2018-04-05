@@ -419,15 +419,19 @@ def refreshList():
     count = ui.listWidget.count()
     index = 0
     refreshBridgeGroups()
-    
+    logger = logging.getLogger('HomeGUI')
     while index < count:
         listItem = ui.listWidget.item(index)
         groupId = int(listItem.data(Qt.UserRole))
         bridgeId = int(listItem.data(Qt.UserRole + 1))
+        logger.info( "refreshList b:" + str( bridgeId) + " g:"+ str(groupId))
+
         bridge = bridges[bridgeId]
         group = bridge_groups[bridgeId][groupId]
 
         listItem.setText(group['name'])
+        logger.info( "name:" + group['name'] )
+
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
         if all_on:
