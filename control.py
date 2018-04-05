@@ -23,7 +23,7 @@ class UiEventFilter(QObject):
 
                 mIdle = 0
                 Widget.setMouseTracking(False)
-                refreshList()
+                refresh()
                 set_backlight(True)
                 set_brightness(60)
             return False
@@ -57,7 +57,7 @@ def on_alloff():
     b2.set_group(0,"on", False)
         
     ui.allOffButton.setEnabled(True)
-    refreshList()
+    refresh()
 
 
 def downstairs_on():
@@ -68,7 +68,7 @@ def downstairs_on():
     b.run_scene("Living Room", "Bright")
     b.run_scene("Dining Room", "Bright")
    
-    refreshList()
+    refresh()
 
 def upstairs_off():
     logger = logging.getLogger('HomeGUI')
@@ -76,7 +76,7 @@ def upstairs_off():
     b.set_group(1,"on",False)
     b.set_group(11,"on",False)
 
-    refreshList()
+    refresh()
     
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
@@ -84,7 +84,7 @@ def downstairs_off():
     b.set_group(15,"on",False) #downstairs
     b2.set_group(0,"on",False) #all b2
 
-    refreshList()
+    refresh()
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
@@ -92,7 +92,7 @@ def downstairs_dim():
     
     b.run_scene("Downstairs", "Dim")
 
-    refreshList()
+    refresh()
 
 
 def outside_on():
@@ -100,7 +100,7 @@ def outside_on():
     logger.info( "OutsideBrightest")
     b.run_scene("Outside", "OutsideBrightest")
 
-    refreshList()
+    refresh()
 
 def outside_off():
     logger = logging.getLogger('HomeGUI')
@@ -108,13 +108,13 @@ def outside_off():
     
     b.set_group(10,"on",False) #Outside
     
-    refreshList()
+    refresh()
 
 def kitchen_on():
     logger = logging.getLogger('HomeGUI')
     logger.info( "kitchen_on")
     b.run_scene("Kitchen", "Brightest")
-    refreshList()
+    refresh()
 
 def kitchen_off():
     logger = logging.getLogger('HomeGUI')
@@ -122,14 +122,14 @@ def kitchen_off():
 
     b.set_group(7,"on",False) #Kitchen
 
-    refreshList()
+    refresh()
 
 def kitchen_dim():
     logger = logging.getLogger('HomeGUI')
     logger.info( "kitchen_dim")
     b.run_scene("Kitchen", "Nightlight")
     
-    refreshList()
+    refresh()
 
 
 def hall_on():
@@ -137,7 +137,7 @@ def hall_on():
     logger.info( "hall_on")
     #b.set_group(11,"on",True)
     b.run_scene("Hallway", "Bright")
-    refreshList()
+    refresh()
 
 
 def hall_off():
@@ -145,7 +145,7 @@ def hall_off():
     logger.info( "hall_off")
     b.set_group(11,"on",False) #Hall?
     
-    refreshList()
+    refresh()
 
 def hall_dim():
     logger = logging.getLogger('HomeGUI')
@@ -153,14 +153,14 @@ def hall_dim():
     b.run_scene("Hallway", "Nightlight")
 
     #b.set_group(11,"on",False)
-    refreshList()
+    refresh()
     
 def on_bathroom():
     ui.bathroomButton.setEnabled(False)
     logger = logging.getLogger('HomeGUI')
     logger.info( "bathroom")
     b.set_group(2,"on",True)
-    refreshList()
+    refresh()
 
     ui.bathroomButton.setEnabled(True)
 
@@ -170,7 +170,7 @@ def on_bathroom_off():
     logger.info( "bathroom off")
     b.set_group(2,"on",False)
 
-    refreshList()
+    refresh()
 
     ui.bathroomOffButton.setEnabled(True)
 
@@ -185,44 +185,44 @@ def on_room_off():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,"on",False)
 
-    refreshRoomList()
+    refresh()
 
 
 def on_room_on():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,"on",True)
 
-    refreshRoomList()
+    refresh()
 
 def on_room_100():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,{"on": True,"bri":254})
     
-    refreshRoomList()
+    refresh()
 
 def on_room_50():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,{"on": True,"bri":128})
     
-    refreshRoomList()
+    refresh()
 
 def on_room_25():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,{"on": True,"bri":64})
     
-    refreshRoomList()
+    refresh()
 
 def on_room_12():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,{"on": True,"bri":32})
     
-    refreshRoomList()
+    refresh()
 
 def on_room_dim():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId,{"on": True,"bri":1})
     
-    refreshRoomList()
+    refresh()
 
 
 
@@ -231,39 +231,39 @@ def on_room_sky():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId, {"on": True, "ct": 153} )
     
-    refreshRoomList()
+    refresh()
 
 def on_room_bright():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId, {"on": True, "ct": 213} )
     
-    refreshRoomList()
+    refresh()
 
 def on_room_normal():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId, {"on": True, "ct": 333} )
     
-    refreshRoomList()
+    refresh()
 
 def on_room_warm():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId, {"on": True, "ct": 500} )
     
-    refreshRoomList()
+    refresh()
 
 
 def on_room_red():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId, {"on": True, "hue": 0, "sat": 254} )
     
-    refreshRoomList()
+    refresh()
 
 
 def on_room_blue():
     bridge, groupId = get_room_selection()
     bridge.set_group(groupId, {"on": True, "hue": 46920, "sat": 254} )
 
-    refreshRoomList()
+    refresh()
 
 def on_room_slider(value):
     logger = logging.getLogger('HomeGUI')
@@ -378,18 +378,6 @@ bridge_groups={}
 bridge_groups[0] = {}
 bridge_groups[1] = {}
 
-
-def refreshBridgeGroups():
-    for bridgeId in bridges:
-        bridge = bridges[bridgeId]
-        groups = bridge.get_group()
-        for groupIdStr in groups:
-            group = groups[groupIdStr]
-            groupId = int(groupIdStr)
-            bridge_groups[bridgeId][groupId] = group
-
-refreshBridgeGroups()
-
 def addRoomList(listItem, name, bridgeId, groupId, all_on, any_on):
     listItem.setText(name)
     listItem.setData(Qt.UserRole, groupId)
@@ -421,7 +409,16 @@ def addList():
                     addRoomList(listItem, name, bridgeId, groupId, all_on, any_on)
                     listItem = QListWidgetItem(ui.listWidgetRoom)
                     addRoomList(listItem, name, bridgeId, groupId, all_on, any_on)
-            
+
+def refreshBridgeGroups():
+    for bridgeId in bridges:
+        bridge = bridges[bridgeId]
+        groups = bridge.get_group()
+        for groupIdStr in groups:
+            group = groups[groupIdStr]
+            groupId = int(groupIdStr)
+            bridge_groups[bridgeId][groupId] = group
+
 def refreshList(): 
     count = ui.listWidget.count()
     index = 0
@@ -435,7 +432,6 @@ def refreshList():
         group = bridge_groups[bridgeId][groupId]
 
         listItem.setText(group['name'])
-        logger.info( "name:" + group['name'] )
 
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
@@ -456,7 +452,7 @@ def refreshRoomList():
         groupId = int(listItem.data(Qt.UserRole))
         bridgeId = int(listItem.data(Qt.UserRole + 1))
         bridge = bridges[bridgeId]
-        group = bridge.get_group(groupId)
+        group = bridge_groups[bridgeId][groupId]
 
         listItem.setText(group['name'])
         all_on = group['state']['all_on']
@@ -469,6 +465,10 @@ def refreshRoomList():
             listItem.setCheckState(Qt.Unchecked)
         index = index + 1
 
+def refresh():
+    refreshBridgeGroups()
+    refreshList()
+    refreshRoomList()
 
 addList()
             
