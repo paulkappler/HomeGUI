@@ -56,7 +56,8 @@ def cbf(GPIO, level, tick):
             if commandDiff > 2000000:
                 b.run_scene("Downstairs", "Dim")
             else:
-                b.set_group(2,"on",False)
+                #Downstairs Off
+                b.set_group(15,"on",False)
                 b2.set_group(0,"on",False)
 
       if level == 0:
