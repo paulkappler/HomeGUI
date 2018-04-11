@@ -36,9 +36,12 @@ def cbf(GPIO, level, tick):
    global u
    global d 
    global lastCommand
+   #Diff is the time since the change in GPIO change
    diff = pigpio.tickDiff(last[GPIO], tick)
    print("G={} l={} t={} d={}".format(GPIO, level, tick, diff)) 
    last[GPIO] = tick
+
+   #Only active if we have not seen a change in this pin recently
    if diff > 5000:
       commandDiff = pigpio.tickDiff(lastCommand, tick)
       lastCommand = tick
@@ -53,7 +56,7 @@ def cbf(GPIO, level, tick):
             if commandDiff > 2000000:
                 b.run_scene("Downstairs", "Dim")
             else:
-                b.set_group(15,"on",False)
+                b.set_group(2,"on",False)
                 b2.set_group(0,"on",False)
 
       if level == 0:
@@ -71,17 +74,13 @@ def cbf(GPIO, level, tick):
             pi.write(4,1)
             pi.write(2,0)
             
-            #b.set_group(11,"on", True)
-            #b.run_scene("Hallway", "Nightlight")
 
-            #b.run_scene("Downstairs", "Normal")
          if level == 0:
             print("UP")
             up = True
             pi.write(2,0)
             pi.write(3,1)
             pi.write(4,0)
-            #b.set_group(15,"on", True)
             b.run_scene("Downstairs", "Normal")
 
    
