@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		4D018CC8207DCEA200D6B6AC /* LightSwitch.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = LightSwitch.py; path = ../LightSwitch.py; sourceTree = "<group>"; };
+		4D018CC9207DCEDE00D6B6AC /* switch.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = switch.py; path = ../switch.py; sourceTree = "<group>"; };
+		4D018CCA207DCEDE00D6B6AC /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = __init__.py; path = ../__init__.py; sourceTree = "<group>"; };
+		4D018CCB207DCEDE00D6B6AC /* mywidget.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = mywidget.py; path = ../mywidget.py; sourceTree = "<group>"; };
+		4D018CCC207DCEDE00D6B6AC /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build.sh; path = ../build.sh; sourceTree = "<group>"; };
+		4D018CCD207DCEDE00D6B6AC /* HomeGUId.service */ = {isa = PBXFileReference; lastKnownFileType = text; name = HomeGUId.service; path = ../HomeGUId.service; sourceTree = "<group>"; };
+		4D018CCE207DCEDE00D6B6AC /* pigpiod.service */ = {isa = PBXFileReference; lastKnownFileType = text; name = pigpiod.service; path = ../pigpiod.service; sourceTree = "<group>"; };
+		4D018CCF207DCEDF00D6B6AC /* LightSwitch.service */ = {isa = PBXFileReference; lastKnownFileType = text; name = LightSwitch.service; path = ../LightSwitch.service; sourceTree = "<group>"; };
+		4D018CD0207DCEDF00D6B6AC /* groups.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = groups.py; path = ../groups.py; sourceTree = "<group>"; };
+		4D018CD1207DCEDF00D6B6AC /* d.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = d.sh; path = ../d.sh; sourceTree = "<group>"; };
+		4D018CD2207DCEDF00D6B6AC /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = run.sh; path = ../run.sh; sourceTree = "<group>"; };
 		4D4A211C2026A965002176CF /* control.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = control.py; path = ../control.py; sourceTree = "<group>"; };
 		4D4A211D2026BD48002176CF /* phue.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = phue.py; path = ../phue.py; sourceTree = "<group>"; };
 		4D4A211E2026C1CE002176CF /* widget.ui */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = widget.ui; path = ../widget.ui; sourceTree = "<group>"; };
@@ -19,6 +30,17 @@
 				4D4A211E2026C1CE002176CF /* widget.ui */,
 				4D4A211D2026BD48002176CF /* phue.py */,
 				4D4A211C2026A965002176CF /* control.py */,
+				4D018CC8207DCEA200D6B6AC /* LightSwitch.py */,
+				4D018CCA207DCEDE00D6B6AC /* __init__.py */,
+				4D018CCC207DCEDE00D6B6AC /* build.sh */,
+				4D018CD1207DCEDF00D6B6AC /* d.sh */,
+				4D018CD0207DCEDF00D6B6AC /* groups.py */,
+				4D018CCD207DCEDE00D6B6AC /* HomeGUId.service */,
+				4D018CCF207DCEDF00D6B6AC /* LightSwitch.service */,
+				4D018CCB207DCEDE00D6B6AC /* mywidget.py */,
+				4D018CCE207DCEDE00D6B6AC /* pigpiod.service */,
+				4D018CD2207DCEDF00D6B6AC /* run.sh */,
+				4D018CC9207DCEDE00D6B6AC /* switch.py */,
 			);
 			sourceTree = "<group>";
 		};

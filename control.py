@@ -453,8 +453,8 @@ def refreshRoomList():
         bridgeId = int(listItem.data(Qt.UserRole + 1))
         bridge = bridges[bridgeId]
         group = bridge_groups[bridgeId][groupId]
-
-        listItem.setText(group['name'])
+        bri = group['action']['bri']
+        listItem.setText(group['name'] + ' ' + str(bri))
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
         if all_on:
