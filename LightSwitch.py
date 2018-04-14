@@ -53,10 +53,11 @@ def cbf(GPIO, level, tick):
             pi.write(2,1)
             pi.write(3,0)
             pi.write(4,0)
-            if commandDiff > 2000000:
+            if commandDiff > 4000000:
+                b.set_group(2,"on",False)
+            elif commandDiff > 2000000:
                 b.run_scene("Downstairs", "Dim")
             else:
-                #Downstairs Off
                 b.set_group(15,"on",False)
                 b2.set_group(0,"on",False)
 
@@ -99,10 +100,15 @@ try:
       tick = pi.get_current_tick()
       commandDiff = pigpio.tickDiff(lastCommand, tick)
       if down:
-          if commandDiff > 2000000:
+          if commandDiff > 4000000:
+            pi.write(3,1)
+            pi.write(4,1)
+            pi.write(2,0)
+          elif commandDiff > 2000000:
             pi.write(3,0)
             pi.write(4,1)
             pi.write(2,0)
+
 except KeyboardInterrupt:
    print("\nTidying up")
    for c in cb:
