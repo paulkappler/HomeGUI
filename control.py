@@ -42,8 +42,9 @@ class UiLogHandler(logging.Handler):
         ui.debugText.insertPlainText ( self.format(record) + "\n")
         ui.debugText.moveCursor(QTextCursor.End)
 
-
-
+class UiStatusHandler(logging.Handler):
+    def emit(self, record):
+        ui.statusLabel.setText(self.format(record))
 
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -103,11 +104,12 @@ def outside_on():
 
 def outside_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "outside_off")
-    
+    logger.info( "outside off")
     b.set_group(10,"on",False) #Outside
-    
+    logger.info( "outside off refresh")
     refresh()
+    logger.info( "outside off complete")
+
 
 def kitchen_on():
     logger = logging.getLogger('HomeGUI')
@@ -356,6 +358,12 @@ formatter = logging.Formatter('%(name)-8s:%(asctime)-12s %(levelname)-8s %(messa
 console.setFormatter(formatter)
 uiLogHandler.setFormatter(formatter)
 
+uiStatusHandler = UiStatusHandler()
+uiStatusHandler.setLevel(logging.DEBUG)
+statusFormatter = logging.Formatter('%(message)s')
+uiStatusHandler.setFormatter(statusFormatter)
+
+
 logger = logging.getLogger('phue')
 logger.addHandler(console)
 logger.addHandler(uiLogHandler)
@@ -364,7 +372,9 @@ logger.setLevel(logging.INFO)
 logger = logging.getLogger('HomeGUI')
 logger.addHandler(console)
 logger.addHandler(uiLogHandler)
+logger.addHandler(uiStatusHandler)
 logger.setLevel(logging.DEBUG)
+
 
 bridges = {}
 
