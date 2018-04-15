@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>471</height>
+    <width>778</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -56,7 +56,7 @@
        <property name="spacing">
         <number>5</number>
        </property>
-       <item row="2" column="2">
+       <item row="3" column="3">
         <widget class="QPushButton" name="kitDimButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -70,20 +70,7 @@ Dim</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="6" rowspan="10">
-        <widget class="QListWidget" name="listWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="mouseTracking">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
+       <item row="2" column="3">
         <widget class="QPushButton" name="kitOnButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -97,7 +84,7 @@ On</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <widget class="QPushButton" name="downOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -111,7 +98,7 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="3" column="1">
         <widget class="QPushButton" name="downDimButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -125,7 +112,7 @@ Dim</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="2" column="1">
         <widget class="QPushButton" name="downOnButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -139,7 +126,7 @@ On</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
+       <item row="2" column="4">
         <widget class="QPushButton" name="hallOnButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -153,7 +140,7 @@ On</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
+       <item row="3" column="4">
         <widget class="QPushButton" name="hallDimButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -167,7 +154,7 @@ Dim</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
+       <item row="4" column="3">
         <widget class="QPushButton" name="kitOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -181,7 +168,7 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1" colspan="4">
+       <item row="6" column="1" colspan="5">
         <widget class="QPushButton" name="allOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -197,7 +184,7 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
+       <item row="3" column="5">
         <widget class="QPushButton" name="outOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -211,7 +198,7 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
+       <item row="2" column="5">
         <widget class="QPushButton" name="outOnButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -225,7 +212,7 @@ On</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="4">
+       <item row="4" column="5">
         <widget class="QPushButton" name="upOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -239,7 +226,7 @@ Off</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
+       <item row="4" column="4">
         <widget class="QPushButton" name="hallOffButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -249,6 +236,76 @@ Off</string>
          </property>
          <property name="text">
           <string>Hall
+Off</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="7">
+        <widget class="QLabel" name="statusLabel">
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7" rowspan="10">
+        <widget class="QListWidget" name="listWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="mouseTracking">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="downHallOnButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Downstairs
+Hall
+On</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="downHallDimButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Downstairs
+Hall
+Dim</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="downHallOffButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Downstairs
+Hall
 Off</string>
          </property>
         </widget>

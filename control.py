@@ -18,8 +18,8 @@ class UiEventFilter(QObject):
         if event.type() == QEvent.MouseMove:
             global mIdle
             if mIdle > 5:
-                logger = logging.getLogger('HomeGUI')
-                logger.info("MouseMove Event " + str(mIdle) )
+                #logger = logging.getLogger('HomeGUI')
+                #logger.info("MouseMove Event " + str(mIdle) )
 
                 mIdle = 0
                 Widget.setMouseTracking(False)
@@ -63,7 +63,6 @@ def on_alloff():
 def downstairs_on():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_on")
-    #b.set_group(11,"on",True)
     b.run_scene("Kitchen", "Bright")
     b.run_scene("Living Room", "Bright")
     b.run_scene("Dining Room", "Bright")
@@ -305,8 +304,8 @@ def set_brightness(light):
         brightness = open("/sys/class/backlight/rpi_backlight/brightness", "w")
         brightness.write(str(int(light)))
         brightness.close()
-        logger = logging.getLogger('HomeGUI')
-        logger.info("mBrightness:" + str(mBrightness))
+        #logger = logging.getLogger('HomeGUI')
+        #logger.info("mBrightness:" + str(mBrightness))
 
 
 def set_backlight(light):
@@ -319,8 +318,8 @@ def set_backlight(light):
         else:
             bl_power.write("1")
         bl_power.close()
-        logger = logging.getLogger('HomeGUI')
-        logger.info("mBacklight:" + str(mBacklight))
+        #logger = logging.getLogger('HomeGUI')
+        #logger.info("mBacklight:" + str(mBacklight))
 
 
 
