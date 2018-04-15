@@ -46,61 +46,83 @@ class UiStatusHandler(logging.Handler):
     def emit(self, record):
         ui.statusLabel.setText(self.format(record))
 
+
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
 def on_alloff():
-    ui.allOffButton.setEnabled(False)
-    
+    logger.info( "All Off B")
     b.set_group(0,"on", False)
+    
+    logger.info( "All Off B2")
     b2.set_group(0,"on", False)
-        
-    ui.allOffButton.setEnabled(True)
+
+    logger.info( "All Off refresh")
     refresh()
+    logger.info( "All Off complete")
 
 
 def downstairs_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "downstairs_on")
+    logger.info( "Kitchen Bright")
     b.run_scene("Kitchen", "Bright")
+    
+    logger.info( "Living Room Bright")
     b.run_scene("Living Room", "Bright")
+    
+    logger.info( "Dining Room Bright")
     b.run_scene("Dining Room", "Bright")
-   
+    
+    logger.info( "downstairs on refresh")
     refresh()
+    logger.info( "downstairs on complete")
+
 
 def upstairs_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "upstairs_off")
+    logger.info( "upstairs off")
     b.set_group(1,"on",False)
     b.set_group(11,"on",False)
 
     refresh()
+    logger.info( "upstairs off complete")
+
     
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "downstairs_off")
+    logger.info( "downstairs off")
     b.set_group(15,"on",False) #downstairs
+    
+    logger.info( "All Off B2")
     b2.set_group(0,"on",False) #all b2
 
+    logger.info( "downstairs off refresh")
+    
     refresh()
+    logger.info( "downstairs off complete")
+
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
     logger.info( "downstairs_dim")
     
     b.run_scene("Downstairs", "Dim")
+    logger.info( "downstairs_dim refresy")
 
     refresh()
+    logger.info( "downstairs_dim complete")
 
 
 def outside_on():
     logger = logging.getLogger('HomeGUI')
     logger.info( "OutsideBrightest")
     b.run_scene("Outside", "OutsideBrightest")
-
+    logger.info( "OutsideBrightest refresh")
     refresh()
+    logger.info( "OutsideBrightest complete")
+
 
 def outside_off():
     logger = logging.getLogger('HomeGUI')
@@ -113,9 +135,12 @@ def outside_off():
 
 def kitchen_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "kitchen_on")
+    logger.info("Kitchen Brightest")
     b.run_scene("Kitchen", "Brightest")
+    logger.info("Kitchen Brightest refresh")
     refresh()
+    logger.info("Kitchen Brightest complete")
+
 
 def kitchen_off():
     logger = logging.getLogger('HomeGUI')
@@ -124,56 +149,45 @@ def kitchen_off():
     b.set_group(7,"on",False) #Kitchen
 
     refresh()
+    logger.info("Kitchen off complete")
+
 
 def kitchen_dim():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "kitchen_dim")
+    logger.info("Kitchen Nightlight")
     b.run_scene("Kitchen", "Nightlight")
-    
+    logger.info("Kitchen Nightlight refresh")
     refresh()
+    logger.info("Kitchen Nightlight complete")
+
 
 
 def hall_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "hall_on")
-    #b.set_group(11,"on",True)
+    logger.info( "Hallway Bright")
     b.run_scene("Hallway", "Bright")
     refresh()
+    logger.info("Hallway Bright complete")
+
 
 
 def hall_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "hall_off")
+    logger.info( "Hallway off")
     b.set_group(11,"on",False) #Hall?
-    
+    logger.info("Hallway off refresh")
     refresh()
+    logger.info("Hallway off complete")
+
 
 def hall_dim():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "hall_dim")
+    logger.info("Hallway Nightlight")
     b.run_scene("Hallway", "Nightlight")
-
-    #b.set_group(11,"on",False)
+    logger.info("Hallway Nightlight refresh")
     refresh()
-    
-def on_bathroom():
-    ui.bathroomButton.setEnabled(False)
-    logger = logging.getLogger('HomeGUI')
-    logger.info( "bathroom")
-    b.set_group(2,"on",True)
-    refresh()
+    logger.info("Hallway Nightlight complete")
 
-    ui.bathroomButton.setEnabled(True)
-
-def on_bathroom_off():
-    ui.bathroomOffButton.setEnabled(False)
-    logger = logging.getLogger('HomeGUI')
-    logger.info( "bathroom off")
-    b.set_group(2,"on",False)
-
-    refresh()
-
-    ui.bathroomOffButton.setEnabled(True)
 
 def get_room_selection():
     listItem = ui.listWidgetRoom.currentItem()
