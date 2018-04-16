@@ -1168,8 +1168,7 @@ class Bridge(object):
             if group_lights == scene.lights:
                 self.activate_scene(group.group_id, scene.scene_id)
                 return
-        logger.warn("run_scene: did not find a scene: %s "
-                    "that shared lights with group %s".format(scene_name, group))
+        logger.warn("run_scene: did not find a scene: %s that shared lights with group %s", scene_name, group_name)
 
     # Schedules #####
     def get_schedule(self, schedule_id=None, parameter=None):
