@@ -164,8 +164,12 @@ def kitchen_dim():
 
 def hall_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "Hallway Bright")
+    
+    logger.info("Hallway Bright in progress")
     b.run_scene("Hallway", "Bright")
+    
+    
+    logger.info("Hallway Bright refresh ")
     refresh()
     logger.info("Hallway Bright complete")
 
@@ -173,8 +177,8 @@ def hall_on():
 
 def hall_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "Hallway off")
-    b.set_group(11,"on",False) #Hall?
+    logger.info( "Hallway off in progress" )
+    b.set_group(11,"on", False)
     logger.info("Hallway off refresh")
     refresh()
     logger.info("Hallway off complete")
@@ -182,7 +186,7 @@ def hall_off():
 
 def hall_dim():
     logger = logging.getLogger('HomeGUI')
-    logger.info("Hallway Nightlight")
+    logger.info("Hallway Nightlight in progress")
     b.run_scene("Hallway", "Nightlight")
     logger.info("Hallway Nightlight refresh")
     refresh()
