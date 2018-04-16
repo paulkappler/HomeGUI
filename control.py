@@ -54,10 +54,10 @@ def get_ip_address():
     return s.getsockname()[0]
 
 def on_alloff():
-    logger.info( "All Off B")
+    logger.info( "All Off B in progress")
     b.set_group(0,"on", False)
     
-    logger.info( "All Off B2")
+    logger.info( "All Off B2 in progress")
     b2.set_group(0,"on", False)
 
     logger.info( "All Off refresh")
@@ -67,13 +67,13 @@ def on_alloff():
 
 def downstairs_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "Kitchen Bright")
+    logger.info( "Kitchen Bright in progress")
     b.run_scene("Kitchen", "Bright")
     
-    logger.info( "Living Room Bright")
+    logger.info( "Living Room Bright in progress")
     b.run_scene("Living Room", "Bright")
     
-    logger.info( "Dining Room Bright")
+    logger.info( "Dining Room Bright in progress")
     b.run_scene("Dining Room", "Bright")
     
     logger.info( "downstairs on refresh")
@@ -83,7 +83,7 @@ def downstairs_on():
 
 def upstairs_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "upstairs off")
+    logger.info( "upstairs off in progress")
     b.set_group(1,"on",False)
     b.set_group(11,"on",False)
 
@@ -93,10 +93,10 @@ def upstairs_off():
     
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "downstairs off")
+    logger.info( "downstairs off in progress")
     b.set_group(15,"on",False) #downstairs
     
-    logger.info( "All Off B2")
+    logger.info( "All Off B2 in progress")
     b2.set_group(0,"on",False) #all b2
 
     logger.info( "downstairs off refresh")
@@ -107,10 +107,10 @@ def downstairs_off():
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "downstairs_dim")
+    logger.info( "downstairs_dim in progress")
     
     b.run_scene("Downstairs", "Dim")
-    logger.info( "downstairs_dim refresy")
+    logger.info( "downstairs_dim refresh")
 
     refresh()
     logger.info( "downstairs_dim complete")
@@ -118,7 +118,7 @@ def downstairs_dim():
 
 def outside_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "OutsideBrightest")
+    logger.info( "OutsideBrightest in progress")
     b.run_scene("Outside", "OutsideBrightest")
     logger.info( "OutsideBrightest refresh")
     refresh()
@@ -127,7 +127,7 @@ def outside_on():
 
 def outside_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "outside off")
+    logger.info( "outside off in progress")
     b.set_group(10,"on",False) #Outside
     logger.info( "outside off refresh")
     refresh()
@@ -136,7 +136,7 @@ def outside_off():
 
 def kitchen_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info("Kitchen Brightest")
+    logger.info("Kitchen Brightest in progress")
     b.run_scene("Kitchen", "Brightest")
     logger.info("Kitchen Brightest refresh")
     refresh()
