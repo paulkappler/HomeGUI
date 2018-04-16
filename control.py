@@ -162,13 +162,50 @@ def kitchen_dim():
     logger.info("Kitchen Nightlight complete")
 
 
+def downhall_on():
+    logger = logging.getLogger('HomeGUI')
+    
+    logger.info("Down Hallway Bright in progress")
+    b.set_light('Downstairs Hall', {"on": True, "bri": 254, "ct": 333})
+
+    
+    logger.info("DownHallway Bright refresh ")
+    refresh()
+    
+    logger.info("DownHallway Bright complete")
+
+
+
+def downhall_off():
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "Downstairs Hall off in progress" )
+    b.set_light('Downstairs Hall', "on", False)
+
+    
+    logger.info("DownHallway off refresh")
+    refresh()
+    logger.info("DownHallway off complete")
+
+
+def downhall_dim():
+    logger = logging.getLogger('HomeGUI')
+    
+    logger.info("DownHallway Nightlight")
+    b.set_light('Downstairs Hall', {"on": True, "bri": 1, "ct": 500})
+
+    logger.info("DownHallway Nightlight refresh")
+    refresh()
+    
+    logger.info("DownHallway Nightlight complete")
+
+
 
 def hall_on():
     logger = logging.getLogger('HomeGUI')
 
     logger.info("Hallway Bright in progress")
-    b.run_scene("Hallway", "Bright")
-    
+    b.set_light('Downstairs Hall', 'on', True)
+
     
     logger.info("Hallway Bright refresh ")
     refresh()
@@ -506,6 +543,11 @@ addList()
             
 ui.ipValue.setText(get_ip_address())
 ui.allOffButton.clicked.connect(on_alloff)
+
+ui.downHallOffButton.clicked.connect(downhall_off)
+ui.downHallOnButton.clicked.connect(downhall_on)
+ui.downHallDimButton.clicked.connect(downhall_dim)
+
 
 ui.hallOnButton.clicked.connect(hall_on)
 ui.hallDimButton.clicked.connect(hall_dim)
