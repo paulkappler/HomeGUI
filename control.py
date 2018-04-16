@@ -45,6 +45,7 @@ class UiLogHandler(logging.Handler):
 class UiStatusHandler(logging.Handler):
     def emit(self, record):
         ui.statusLabel.setText(self.format(record))
+        app.processEvents()
 
 
 def get_ip_address():
@@ -164,13 +165,14 @@ def kitchen_dim():
 
 def hall_on():
     logger = logging.getLogger('HomeGUI')
-    
+
     logger.info("Hallway Bright in progress")
     b.run_scene("Hallway", "Bright")
     
     
     logger.info("Hallway Bright refresh ")
     refresh()
+    
     logger.info("Hallway Bright complete")
 
 
@@ -186,10 +188,13 @@ def hall_off():
 
 def hall_dim():
     logger = logging.getLogger('HomeGUI')
-    logger.info("Hallway Nightlight in progress")
+    
+    logger.info("Hallway Nightlight")
     b.run_scene("Hallway", "Nightlight")
+    
     logger.info("Hallway Nightlight refresh")
     refresh()
+    
     logger.info("Hallway Nightlight complete")
 
 
