@@ -67,18 +67,11 @@ def on_alloff():
 
 def downstairs_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "Kitchen Bright in progress")
-    b.run_scene("Kitchen", "Bright")
-    
-    logger.info( "Living Room Bright in progress")
-    b.run_scene("Living Room", "Bright")
-    
-    logger.info( "Dining Room Bright in progress")
-    b.run_scene("Dining Room", "Bright")
-    
-    logger.info( "downstairs on refresh")
+    logger.info( "Downstairs Normal in progress")
+    b.run_scene("Downstairs", "Normal")
+    logger.info( "Downstairs Normal refresh")
     refresh()
-    logger.info( "downstairs on complete")
+    logger.info( "Downstairs Normal complete")
 
 
 def upstairs_off():
@@ -182,21 +175,21 @@ def downhall_off():
     b.set_light('Downstairs Hall', "on", False)
 
     
-    logger.info("DownHallway off refresh")
+    logger.info("Downstairs Hall off refresh")
     refresh()
-    logger.info("DownHallway off complete")
+    logger.info("Down Hallway off complete")
 
 
 def downhall_dim():
     logger = logging.getLogger('HomeGUI')
     
-    logger.info("DownHallway Nightlight")
+    logger.info("Down Hallway Nightlight")
     b.set_light('Downstairs Hall', {"on": True, "bri": 1, "ct": 500})
 
-    logger.info("DownHallway Nightlight refresh")
+    logger.info("Down Hallway Nightlight refresh")
     refresh()
     
-    logger.info("DownHallway Nightlight complete")
+    logger.info("Down Hallway Nightlight complete")
 
 
 
@@ -538,6 +531,8 @@ def refresh():
     refreshBridgeGroups()
     refreshList()
     refreshRoomList()
+    app.processEvents()
+
 
 addList()
             
