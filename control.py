@@ -523,15 +523,20 @@ def refreshRoomList():
         bridge = bridges[bridgeId]
         group = bridge_groups[bridgeId][groupId]
         bri = group['action']['bri']
-        listItem.setText(group['name'] + ' ' + str(bri))
         all_on = group['state']['all_on']
         any_on = group['state']['any_on']
         if all_on:
             listItem.setCheckState(Qt.Checked)
+            listItem.setText(group['name'] + ' ' + str(bri))
+
         elif any_on:
             listItem.setCheckState(Qt.PartiallyChecked)
+            listItem.setText(group['name'] + ' ' + str(bri))
+
         else:
             listItem.setCheckState(Qt.Unchecked)
+            listItem.setText(group['name'])
+
         index = index + 1
 
 def refresh():
@@ -612,6 +617,28 @@ ui.label_2.setText(r.text)
 
 r = requests.get("https://autodiscover.kappler.us/internet_test/id/1")
 ui.label_4.setText(r.text)
+
+
+import requests
+import pyqtgraph as pg
+import numpy as np
+
+r = requests.get("https://autodiscover.kappler.us/internet_test/id/log/1")
+log1 = str(r.text).strip("[]")
+y1 = np.fromstring(log1,sep=',') * 9 / 5 + 32
+
+r = requests.get("https://autodiscover.kappler.us/internet_test/id/log/2")
+log2 = str(r.text).strip("[]")
+y2 = np.fromstring(log2,sep=',') * 9 / 5 + 32
+
+
+x = np.arange(128)
+plotWidget = pg.plot(title="Three plot curves")
+plotWidget.plot(x, y1, pen=(1,3))
+plotWidget.plot(x, y2, pen=(2,3))
+
+ui.gridLayout_6.addWidget(plotWidget, 0, 0, 1, 1)
+
 
 sys.exit(app.exec_())
 
