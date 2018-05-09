@@ -54,10 +54,10 @@ def get_ip_address():
     return s.getsockname()[0]
 
 def on_alloff():
-    logger.info( "All Off B in progress")
+    logger.info( "All Off B")
     b.set_group(0,"on", False)
     
-    logger.info( "All Off B2 in progress")
+    logger.info( "All Off B2")
     b2.set_group(0,"on", False)
 
     logger.info( "All Off refresh")
@@ -67,18 +67,27 @@ def on_alloff():
 
 def downstairs_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "Downstairs Normal in progress")
-    b.run_scene("Downstairs", "Normal")
-    logger.info( "Downstairs Normal refresh")
+    logger.info( "Kitchen Bright")
+    b.run_scene("Kitchen", "Bright")
+    
+    logger.info( "Living Room Bright")
+    b.run_scene("Living Room", "Bright")
+    
+    logger.info( "Dining Room Bright")
+    b.run_scene("Dining Room", "Bright")
+    
+    logger.info( "downstairs on refresh")
     refresh()
-    logger.info( "Downstairs Normal complete")
+    logger.info( "downstairs on complete")
 
 
 def upstairs_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "upstairs off in progress")
+    logger.info( "upstairs off")
     b.set_group(1,"on",False)
     b.set_group(11,"on",False)
+
+    logger.info( "upstairs off refresh")
 
     refresh()
     logger.info( "upstairs off complete")
@@ -86,10 +95,10 @@ def upstairs_off():
     
 def downstairs_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "downstairs off in progress")
+    logger.info( "downstairs off")
     b.set_group(15,"on",False) #downstairs
     
-    logger.info( "All Off B2 in progress")
+    logger.info( "All Off B2")
     b2.set_group(0,"on",False) #all b2
 
     logger.info( "downstairs off refresh")
@@ -100,10 +109,10 @@ def downstairs_off():
     
 def downstairs_dim():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "downstairs_dim in progress")
+    logger.info( "downstairs_dim")
     
     b.run_scene("Downstairs", "Dim")
-    logger.info( "downstairs_dim refresh")
+    logger.info( "downstairs_dim refresy")
 
     refresh()
     logger.info( "downstairs_dim complete")
@@ -111,7 +120,7 @@ def downstairs_dim():
 
 def outside_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "OutsideBrightest in progress")
+    logger.info( "OutsideBrightest")
     b.run_scene("Outside", "OutsideBrightest")
     logger.info( "OutsideBrightest refresh")
     refresh()
@@ -120,7 +129,7 @@ def outside_on():
 
 def outside_off():
     logger = logging.getLogger('HomeGUI')
-    logger.info( "outside off in progress")
+    logger.info( "outside off")
     b.set_group(10,"on",False) #Outside
     logger.info( "outside off refresh")
     refresh()
@@ -129,7 +138,7 @@ def outside_off():
 
 def kitchen_on():
     logger = logging.getLogger('HomeGUI')
-    logger.info("Kitchen Brightest in progress")
+    logger.info("Kitchen Brightest")
     b.run_scene("Kitchen", "Brightest")
     logger.info("Kitchen Brightest refresh")
     refresh()
@@ -175,21 +184,21 @@ def downhall_off():
     b.set_light('Downstairs Hall', "on", False)
 
     
-    logger.info("Downstairs Hall off refresh")
+    logger.info("DownHallway off refresh")
     refresh()
-    logger.info("Down Hallway off complete")
+    logger.info("DownHallway off complete")
 
 
 def downhall_dim():
     logger = logging.getLogger('HomeGUI')
     
-    logger.info("Down Hallway Nightlight")
+    logger.info("DownHallway Nightlight")
     b.set_light('Downstairs Hall', {"on": True, "bri": 1, "ct": 500})
 
-    logger.info("Down Hallway Nightlight refresh")
+    logger.info("DownHallway Nightlight refresh")
     refresh()
     
-    logger.info("Down Hallway Nightlight complete")
+    logger.info("DownHallway Nightlight complete")
 
 
 
@@ -536,8 +545,6 @@ def refresh():
     refreshBridgeGroups()
     refreshList()
     refreshRoomList()
-    app.processEvents()
-
 
 addList()
             
