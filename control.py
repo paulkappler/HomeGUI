@@ -206,7 +206,7 @@ def hall_on():
     logger = logging.getLogger('HomeGUI')
 
     logger.info("Hallway Bright in progress")
-    b.set_light('Downstairs Hall', 'on', True)
+    b.run_scene("Hallway", "Bright")
 
     
     logger.info("Hallway Bright refresh ")
