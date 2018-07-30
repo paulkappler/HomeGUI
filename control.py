@@ -84,8 +84,7 @@ def downstairs_on():
 def upstairs_off():
     logger = logging.getLogger('HomeGUI')
     logger.info( "upstairs off")
-    b.set_group(1,"on",False)
-    b.set_group(11,"on",False)
+    b.set_group(6,"on",False)
 
     logger.info( "upstairs off refresh")
 
