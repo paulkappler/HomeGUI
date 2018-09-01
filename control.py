@@ -53,6 +53,15 @@ def get_ip_address():
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
+def put_value(idNumber, value):
+    r = requests.put("https://autodiscover.kappler.us/internet_test/id/" + str(int(idNumber)), data=str(value))
+
+def get_value(idNumber):
+    r = requests.get("https://autodiscover.kappler.us/internet_test/id/" + str(int(idNumber)))
+    return r.text
+
+
+
 def on_alloff():
     logger.info( "All Off B")
     b.set_group(0,"on", False)
@@ -348,6 +357,19 @@ def on_slidetimer():
         result = roomBridge.set_group(roomGroupId,"bri",roomValue,transitiontime=5)
         logger.info("room slider timer value" + str(roomValue) + str(result) )
 
+def on_open_window():
+    put_value(5,1.0)
+
+    put_value(6,0.0)
+
+
+def on_close_window():
+    put_value(5,0.0)
+
+    put_value(6,0.0)
+
+def on_auto_window():
+    put_value(6,1.0)
 
 
 def on_exit():
@@ -589,7 +611,8 @@ ui.roomWarmButton.clicked.connect(on_room_warm)
 ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
 
 ui.exitButton.clicked.connect(on_exit)
-
+ui.openWindowButton.clicked.connect(on_open_window)
+ui.closeWindowButton.clicked.connect(on_close_window)
 
 
 Widget.showFullScreen()
