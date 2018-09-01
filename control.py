@@ -358,18 +358,18 @@ def on_slidetimer():
         logger.info("room slider timer value" + str(roomValue) + str(result) )
 
 def on_open_window():
-    put_value(5,1.0)
+    put_value(5,1)
 
-    put_value(6,0.0)
+    put_value(6,0)
 
 
 def on_close_window():
-    put_value(5,0.0)
+    put_value(5,0)
 
-    put_value(6,0.0)
+    put_value(6,0)
 
 def on_auto_window():
-    put_value(6,1.0)
+    put_value(6,1)
 
 
 def on_exit():
@@ -636,11 +636,16 @@ Widget.setMouseTracking(True)
 eventFilter = UiEventFilter()
 app.installEventFilter(eventFilter)
 
-r = requests.get("https://autodiscover.kappler.us/internet_test/id/2")
-ui.label_2.setText(r.text)
+outsideTempC = float(get_value(2))
+outsideTempF = outsideTempC * 9.0 / 5.0 + 32.0
+outsideText = "%4.2f F   %4.2f C" % (outsideTempF,outsideTempC)
 
-r = requests.get("https://autodiscover.kappler.us/internet_test/id/1")
-ui.label_4.setText(r.text)
+ui.label_2.setText(outsideText)
+
+insideTempC = float(get_value(1))
+insideTempF = insideTempC * 9.0 / 5.0 + 32.0
+insideText = "%4.2f F   %4.2f C" % (insideTempF,insideTempC)
+ui.label_4.setText(insideText)
 
 
 import requests
