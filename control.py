@@ -656,7 +656,7 @@ log2 = str(r.text).strip("[]")
 y2 = np.fromstring(log2,sep=',') * 9 / 5 + 32
 
 
-x = np.arange(128)
+x = np.arange(y1.size)
 plotWidget = pg.plot(title="Three plot curves")
 plotWidget.plot(x, y1, pen=(1,3))
 plotWidget.plot(x, y2, pen=(2,3))
