@@ -567,6 +567,28 @@ def refresh():
     refreshList()
     refreshRoomList()
 
+def refreshTemp():
+    outsideTempC = float(get_value(2))
+    outsideTempF = outsideTempC * 9.0 / 5.0 + 32.0
+    outsideText = "%4.2f F   %4.2f C" % (outsideTempF,outsideTempC)
+
+    ui.outsideLabel.setText(outsideText)
+
+    insideTempC = float(get_value(1))
+    insideTempF = insideTempC * 9.0 / 5.0 + 32.0
+    insideText = "%4.2f F   %4.2f C" % (insideTempF,insideTempC)
+    ui.insideLabel.setText(insideText)
+
+    highTargetTempC = float(get_value(1))
+    highTargetTempF = highTargetTempC * 9.0 / 5.0 + 32.0
+    highTargetText = "%4.2f F   %4.2f C" % (highTargetTempF,highTargetTempC)
+    ui.targetRightLabel.setText(highTargetText)
+
+    lowTargetTempC = float(get_value(1))
+    lowTargetTempF = lowTargetTempC * 9.0 / 5.0 + 32.0
+    lowTargetText = "%4.2f F   %4.2f C" % (lowTargetTempF,lowTargetTempC)
+    ui.targetLeftLabel.setText(lowTargetText)
+
 addList()
             
 ui.ipValue.setText(get_ip_address())
@@ -636,16 +658,7 @@ Widget.setMouseTracking(True)
 eventFilter = UiEventFilter()
 app.installEventFilter(eventFilter)
 
-outsideTempC = float(get_value(2))
-outsideTempF = outsideTempC * 9.0 / 5.0 + 32.0
-outsideText = "%4.2f F   %4.2f C" % (outsideTempF,outsideTempC)
-
-ui.label_2.setText(outsideText)
-
-insideTempC = float(get_value(1))
-insideTempF = insideTempC * 9.0 / 5.0 + 32.0
-insideText = "%4.2f F   %4.2f C" % (insideTempF,insideTempC)
-ui.label_4.setText(insideText)
+refreshTemp()
 
 
 import requests
