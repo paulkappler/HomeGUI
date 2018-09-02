@@ -595,7 +595,7 @@ def refreshTemp():
     lowTargetText = "%4.2f F   %4.2f C" % (lowTargetTempF,lowTargetTempC)
     ui.targetLeftLabel.setText(lowTargetText)
 
-    window_open = bool(get_value(5))
+    window_open = bool(float(get_value(5)))
     logger.info( "refreshTemp value 5" + str(window_open))
 
     if window_open:
@@ -603,7 +603,7 @@ def refreshTemp():
     else:
         window_text = "Window Closed"
 
-    window_auto = bool(get_value(6))
+    window_auto = bool(float(get_value(6)))
     logger.info( "refreshTemp value 6" + str(window_auto))
 
     if window_auto:
