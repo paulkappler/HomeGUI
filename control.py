@@ -571,6 +571,9 @@ def refresh():
     refreshRoomList()
 
 def refreshTemp():
+    logger = logging.getLogger('HomeGUI')
+
+    
     outsideTempC = float(get_value(2))
     outsideTempF = outsideTempC * 9.0 / 5.0 + 32.0
     outsideText = "%4.2f F   %4.2f C" % (outsideTempF,outsideTempC)
@@ -610,7 +613,6 @@ def refreshTemp():
     ui.autoLabel.setText(auto_text)
     ui.windowLabel.setText(window_text)
 
-    logger = logging.getLogger('HomeGUI')
     logger.info( "refreshTemp " + window_text)
     logger.info( "refreshTemp " + auto_text)
 
