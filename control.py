@@ -606,6 +606,10 @@ def refreshTemp():
     ui.autoLabel.setText(auto_text)
     ui.windowLabel.setText(window_text)
 
+    logger = logging.getLogger('HomeGUI')
+    logger.info( "refreshTemp " + window_text)
+    logger.info( "refreshTemp " + auto_text)
+
 
 
 addList()
@@ -654,6 +658,7 @@ ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
 ui.exitButton.clicked.connect(on_exit)
 ui.openWindowButton.clicked.connect(on_open_window)
 ui.closeWindowButton.clicked.connect(on_close_window)
+ui.autoWindowButton.clicked.connect(on_auto_window)
 
 
 Widget.showFullScreen()
