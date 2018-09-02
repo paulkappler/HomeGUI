@@ -361,15 +361,18 @@ def on_open_window():
     put_value(5,1)
 
     put_value(6,0)
+    refreshTemp()
 
 
 def on_close_window():
     put_value(5,0)
 
     put_value(6,0)
+    refreshTemp()
 
 def on_auto_window():
     put_value(6,1)
+    refreshTemp()
 
 
 def on_exit():
@@ -579,15 +582,31 @@ def refreshTemp():
     insideText = "%4.2f F   %4.2f C" % (insideTempF,insideTempC)
     ui.insideLabel.setText(insideText)
 
-    highTargetTempC = float(get_value(1))
+    highTargetTempC = float(get_value(3))
     highTargetTempF = highTargetTempC * 9.0 / 5.0 + 32.0
     highTargetText = "%4.2f F   %4.2f C" % (highTargetTempF,highTargetTempC)
     ui.targetRightLabel.setText(highTargetText)
 
-    lowTargetTempC = float(get_value(1))
+    lowTargetTempC = float(get_value(4))
     lowTargetTempF = lowTargetTempC * 9.0 / 5.0 + 32.0
     lowTargetText = "%4.2f F   %4.2f C" % (lowTargetTempF,lowTargetTempC)
     ui.targetLeftLabel.setText(lowTargetText)
+
+    window_open = bool(get_value(5))
+    if window_open:
+        window_text = "Window Open"
+    else:
+        window_text = "Window Closed"
+
+    window_auto = bool(get_value(6))
+    if window_auto:
+        auto_text = "Window Auto"
+    else:
+        auto_text = "Window Manual"
+    ui.autoLabel.setText(auto_text)
+    ui.windowLabel.setText(window_text)
+
+
 
 addList()
             
