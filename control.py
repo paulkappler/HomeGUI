@@ -593,12 +593,16 @@ def refreshTemp():
     ui.targetLeftLabel.setText(lowTargetText)
 
     window_open = bool(get_value(5))
+    logger.info( "refreshTemp value 5" + str(window_open))
+
     if window_open:
         window_text = "Window Open"
     else:
         window_text = "Window Closed"
 
     window_auto = bool(get_value(6))
+    logger.info( "refreshTemp value 6" + str(window_auto))
+
     if window_auto:
         auto_text = "Window Auto"
     else:
