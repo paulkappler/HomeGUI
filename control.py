@@ -54,12 +54,17 @@ def get_ip_address():
     return s.getsockname()[0]
 
 def put_value(idNumber, value):
-    r = requests.put("https://autodiscover.kappler.us/internet_test/id/" + str(int(idNumber)), data=str(value))
+    r = requests.put("https://autodiscover.kappler.us/internet_test/id/" + str(int(idNumber)), data=str(float(value)))
 
 def get_value(idNumber):
     r = requests.get("https://autodiscover.kappler.us/internet_test/id/" + str(int(idNumber)))
     return r.text
 
+def get_value_bool(idNumber):
+    return bool(float(get_value(idNumber)))
+
+def get_value_float(idNumber):
+    return float(get_value(idNumber))
 
 
 def on_alloff():
@@ -574,37 +579,37 @@ def refreshTemp():
     logger = logging.getLogger('HomeGUI')
 
     
-    outsideTempC = float(get_value(2))
+    outsideTempC = get_value_float(2)
     outsideTempF = outsideTempC * 9.0 / 5.0 + 32.0
     outsideText = "%4.2f F   %4.2f C" % (outsideTempF,outsideTempC)
 
     ui.outsideLabel.setText(outsideText)
 
-    insideTempC = float(get_value(1))
+    insideTempC = get_value_float(1)
     insideTempF = insideTempC * 9.0 / 5.0 + 32.0
     insideText = "%4.2f F   %4.2f C" % (insideTempF,insideTempC)
     ui.insideLabel.setText(insideText)
 
-    highTargetTempC = float(get_value(3))
+    highTargetTempC = get_value_float(3)
     highTargetTempF = highTargetTempC * 9.0 / 5.0 + 32.0
     highTargetText = "%4.2f F   %4.2f C" % (highTargetTempF,highTargetTempC)
     ui.targetRightLabel.setText(highTargetText)
 
-    lowTargetTempC = float(get_value(4))
+    lowTargetTempC = get_value_float(4)
     lowTargetTempF = lowTargetTempC * 9.0 / 5.0 + 32.0
     lowTargetText = "%4.2f F   %4.2f C" % (lowTargetTempF,lowTargetTempC)
     ui.targetLeftLabel.setText(lowTargetText)
 
-    window_open = bool(float(get_value(5)))
-    logger.info( "refreshTemp value 5" + str(window_open))
+    window_open = get_value_bool(5)
+    logger.info( "refreshTemp value 5 " + str(window_open))
 
     if window_open:
         window_text = "Window Open"
     else:
         window_text = "Window Closed"
 
-    window_auto = bool(float(get_value(6)))
-    logger.info( "refreshTemp value 6" + str(window_auto))
+    window_auto = get_value_bool(6)
+    logger.info( "refreshTemp value 6 " + str(window_auto))
 
     if window_auto:
         auto_text = "Window Auto"
