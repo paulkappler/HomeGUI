@@ -1,3 +1,18 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+'''
+phue by Nathanaël Lécaudé - A Philips Hue Python library
+Contributions by Marshall Perrin, Justin Lintz
+https://github.com/studioimaginaire/phue
+Original protocol hacking by rsmck : http://rsmck.co.uk/hue
+
+Published under the MIT license - See LICENSE file for more details.
+
+"Hue Personal Wireless Lighting" is a trademark owned by Koninklijke Philips Electronics N.V., see www.meethue.com for more information.
+I am in no way affiliated with the Philips organization.
+
+'''
 
 import json
 import logging
@@ -23,7 +38,7 @@ if platform.system() == 'Windows':
 else:
     USER_HOME = 'HOME'
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 def is_string(data):
@@ -534,7 +549,8 @@ class Scene(object):
 
     def __init__(self, sid, appdata=None, lastupdated=None,
                  lights=None, locked=False, name="", owner="",
-                 picture="", recycle=False, version=0):
+                 picture="", recycle=False, version=0, type="", group="",
+                 *args, **kwargs):
         self.scene_id = sid
         self.appdata = appdata or {}
         self.lastupdated = lastupdated
@@ -548,6 +564,8 @@ class Scene(object):
         self.picture = picture
         self.recycle = recycle
         self.version = version
+        self.type = type
+        self.group = group
 
     def __repr__(self):
         # like default python repr function, but add sensor name
@@ -646,14 +664,13 @@ class Bridge(object):
             raise PhueRequestTimeout(None, error)
 
         result = connection.getresponse()
+        response = result.read()
         connection.close()
         if PY3K:
-            return json.loads(str(result.read(), encoding='utf-8'))
+            return json.loads(response.decode('utf-8'))
         else:
-            result_str = result.read()
-            json_obj = json.loads(result_str)
-            logger.debug(json.dumps(json_obj,indent=4, separators=(',', ': ')))
-            return json_obj
+            logger.debug(response)
+            return json.loads(response)
 
     def get_ip_address(self, set_result=False):
 
@@ -1012,6 +1029,12 @@ class Bridge(object):
         logger.debug(result)
         return result
 
+    def delete_scene(self, scene_id):
+        try:
+            return self.request('DELETE', '/api/' + self.username + '/scenes/' + str(scene_id))
+        except:
+            logger.debug("Unable to delete scene with ID {0}".format(scene_id))
+
     def delete_sensor(self, sensor_id):
         try:
             name = self.sensors_by_id[sensor_id].name
@@ -1033,10 +1056,10 @@ class Bridge(object):
         for group_id in groups:
             if PY3K:
                 if name == groups[group_id]['name']:
-                    return group_id
+                    return int(group_id)
             else:
                 if name.decode('utf-8') == groups[group_id]['name']:
-                    return group_id
+                    return int(group_id)
         return False
 
     def get_group(self, group_id=None, parameter=None):
@@ -1126,12 +1149,15 @@ class Bridge(object):
     def get_scene(self):
         return self.request('GET', '/api/' + self.username + '/scenes')
 
-    def activate_scene(self, group_id, scene_id):
+    def activate_scene(self, group_id, scene_id, transition_time=4):
         return self.request('PUT', '/api/' + self.username + '/groups/' +
                             str(group_id) + '/action',
-                            {"scene": scene_id})
+                            {
+                                "scene": scene_id,
+                                "transitiontime": transition_time
+                            })
 
-    def run_scene(self, group_name, scene_name):
+    def run_scene(self, group_name, scene_name, transition_time=4):
         """Run a scene by group and scene name.
 
         As of 1.11 of the Hue API the scenes are accessable in the
@@ -1147,28 +1173,33 @@ class Bridge(object):
         perfect, but is convenient for setting lights symbolically (and
         can be improved later).
 
+        :param transition_time: The duration of the transition from the
+        light’s current state to the new state in a multiple of 100ms
+        :returns True if a scene was run, False otherwise
+
         """
         groups = [x for x in self.groups if x.name == group_name]
         scenes = [x for x in self.scenes if x.name == scene_name]
         if len(groups) != 1:
-            logger.warn("run_scene: More than 1 group found by name %s",
-                        group_name)
-            return
+            logger.warn("run_scene: More than 1 group found by name {}".format(group_name))
+            return False
         group = groups[0]
         if len(scenes) == 0:
-            logger.warn("run_scene: No scene found %s", scene_name)
-            return
+            logger.warn("run_scene: No scene found {}".format(scene_name))
+            return False
         if len(scenes) == 1:
-            self.activate_scene(group.group_id, scenes[0].scene_id)
-            return
+            self.activate_scene(group.group_id, scenes[0].scene_id, transition_time)
+            return True
         # otherwise, lets figure out if one of the named scenes uses
         # all the lights of the group
         group_lights = sorted([x.light_id for x in group.lights])
         for scene in scenes:
             if group_lights == scene.lights:
-                self.activate_scene(group.group_id, scene.scene_id)
-                return
-        logger.warn("run_scene: did not find a scene: %s that shared lights with group %s", scene_name, group_name)
+                self.activate_scene(group.group_id, scene.scene_id, transition_time)
+                return True
+        logger.warn("run_scene: did not find a scene: {} "
+                    "that shared lights with group {}".format(scene_name, group_name))
+        return False
 
     # Schedules #####
     def get_schedule(self, schedule_id=None, parameter=None):
@@ -1191,6 +1222,13 @@ class Bridge(object):
             }
         }
         return self.request('POST', '/api/' + self.username + '/schedules', schedule)
+
+    def set_schedule_attributes(self, schedule_id, attributes):
+        """
+        :param schedule_id: The ID of the schedule
+        :param attributes: Dictionary with attributes and their new values
+        """
+        return self.request('PUT', '/api/' + self.username + '/schedules/' + str(schedule_id), data=attributes)
 
     def create_group_schedule(self, name, time, group_id, data, description=' '):
         schedule = {
