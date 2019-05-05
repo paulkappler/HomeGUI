@@ -696,25 +696,25 @@ app.installEventFilter(eventFilter)
 refreshTemp()
 
 
-import requests
-import pyqtgraph as pg
-import numpy as np
-
-r = requests.get("https://autodiscover.kappler.us/internet_test/id/log/1")
-log1 = str(r.text).strip("[]")
-y1 = np.fromstring(log1,sep=',') * 9 / 5 + 32
-
-r = requests.get("https://autodiscover.kappler.us/internet_test/id/log/2")
-log2 = str(r.text).strip("[]")
-y2 = np.fromstring(log2,sep=',') * 9 / 5 + 32
-
-
-x = np.arange(y1.size)
-plotWidget = pg.plot(title="Three plot curves")
-plotWidget.plot(x, y1, pen=(1,3))
-plotWidget.plot(x, y2, pen=(2,3))
-
-ui.gridLayout_6.addWidget(plotWidget, 0, 0, 1, 1)
+#import requests
+#import pyqtgraph as pg
+#import numpy as np
+#
+#r = requests.get("https://autodiscover.kappler.us/internet_test/id/log/1")
+#log1 = str(r.text).strip("[]")
+#y1 = np.fromstring(log1,sep=',') * 9 / 5 + 32
+#
+#r = requests.get("https://autodiscover.kappler.us/internet_test/id/log/2")
+#log2 = str(r.text).strip("[]")
+#y2 = np.fromstring(log2,sep=',') * 9 / 5 + 32
+#
+#
+#x = np.arange(y1.size)
+#plotWidget = pg.plot(title="Three plot curves")
+#plotWidget.plot(x, y1, pen=(1,3))
+#plotWidget.plot(x, y2, pen=(2,3))
+#
+#ui.gridLayout_6.addWidget(plotWidget, 0, 0, 1, 1)
 
 
 sys.exit(app.exec_())
