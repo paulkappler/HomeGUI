@@ -1,5 +1,6 @@
 import sys
 import logging
+import logging.handlers
 import socket
 import requests
 
@@ -435,35 +436,47 @@ mBacklight = None
 #if __name__ == "__main__":
 
 
+
 app = QApplication(sys.argv)
 Widget = QWidget()
 ui = mywidget.Ui_Widget()
 ui.setupUi(Widget)
 
 
+formatter = logging.Formatter('%(name)-8s:%(asctime)-12s %(levelname)-8s %(message)s')
+
 uiLogHandler = UiLogHandler()
 uiLogHandler.setLevel(logging.DEBUG)
+uiLogHandler.setFormatter(formatter)
+
+
+fileLogHandler = logging.handlers.TimedRotatingFileHandler('/home/pi/log/ui')
+fileLogHandler.setLevel(logging.DEBUG)
+fileLogHandler.setFormatter(formatter)
+
 console = logging.StreamHandler()
 console.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(name)-8s:%(asctime)-12s %(levelname)-8s %(message)s')
 console.setFormatter(formatter)
-uiLogHandler.setFormatter(formatter)
+
+statusFormatter = logging.Formatter('%(message)s')
 
 uiStatusHandler = UiStatusHandler()
 uiStatusHandler.setLevel(logging.DEBUG)
-statusFormatter = logging.Formatter('%(message)s')
 uiStatusHandler.setFormatter(statusFormatter)
 
 
 logger = logging.getLogger('phue')
 logger.addHandler(console)
 logger.addHandler(uiLogHandler)
+logger.addHandler(fileLogHandler)
+
 logger.setLevel(logging.INFO)
 
 logger = logging.getLogger('HomeGUI')
 logger.addHandler(console)
 logger.addHandler(uiLogHandler)
 logger.addHandler(uiStatusHandler)
+logger.addHandler(fileLogHandler)
 logger.setLevel(logging.DEBUG)
 
 
@@ -621,80 +634,84 @@ def refreshTemp():
     logger.info( "refreshTemp " + window_text)
     logger.info( "refreshTemp " + auto_text)
 
+try:
+
+    addList()
+    
+    ui.ipValue.setText(get_ip_address())
+    ui.allOffButton.clicked.connect(on_alloff)
+
+    ui.downHallOffButton.clicked.connect(downhall_off)
+    ui.downHallOnButton.clicked.connect(downhall_on)
+    ui.downHallDimButton.clicked.connect(downhall_dim)
 
 
-addList()
-            
-ui.ipValue.setText(get_ip_address())
-ui.allOffButton.clicked.connect(on_alloff)
+    ui.hallOnButton.clicked.connect(hall_on)
+    ui.hallDimButton.clicked.connect(hall_dim)
+    ui.hallOffButton.clicked.connect(hall_off)
 
-ui.downHallOffButton.clicked.connect(downhall_off)
-ui.downHallOnButton.clicked.connect(downhall_on)
-ui.downHallDimButton.clicked.connect(downhall_dim)
+    ui.kitOnButton.clicked.connect(kitchen_on)
+    ui.kitDimButton.clicked.connect(kitchen_dim)
+    ui.kitOffButton.clicked.connect(kitchen_off)
 
-
-ui.hallOnButton.clicked.connect(hall_on)
-ui.hallDimButton.clicked.connect(hall_dim)
-ui.hallOffButton.clicked.connect(hall_off)
-
-ui.kitOnButton.clicked.connect(kitchen_on)
-ui.kitDimButton.clicked.connect(kitchen_dim)
-ui.kitOffButton.clicked.connect(kitchen_off)
-
-ui.outOnButton.clicked.connect(outside_on)
-ui.outOffButton.clicked.connect(outside_off)
+    ui.outOnButton.clicked.connect(outside_on)
+    ui.outOffButton.clicked.connect(outside_off)
 
 
-ui.downOnButton.clicked.connect(downstairs_on)
-ui.downOffButton.clicked.connect(downstairs_off)
-ui.downDimButton.clicked.connect(downstairs_dim)
-ui.upOffButton.clicked.connect(upstairs_off)
+    ui.downOnButton.clicked.connect(downstairs_on)
+    ui.downOffButton.clicked.connect(downstairs_off)
+    ui.downDimButton.clicked.connect(downstairs_dim)
+    ui.upOffButton.clicked.connect(upstairs_off)
 
-ui.roomOffButton.clicked.connect(on_room_off)
-ui.roomOnButton.clicked.connect(on_room_on)
-ui.room100Button.clicked.connect(on_room_100)
-ui.room50Button.clicked.connect(on_room_50)
-ui.room25Button.clicked.connect(on_room_25)
-ui.room12Button.clicked.connect(on_room_12)
-ui.roomDimButton.clicked.connect(on_room_dim)
+    ui.roomOffButton.clicked.connect(on_room_off)
+    ui.roomOnButton.clicked.connect(on_room_on)
+    ui.room100Button.clicked.connect(on_room_100)
+    ui.room50Button.clicked.connect(on_room_50)
+    ui.room25Button.clicked.connect(on_room_25)
+    ui.room12Button.clicked.connect(on_room_12)
+    ui.roomDimButton.clicked.connect(on_room_dim)
 
-ui.roomSkyButton.clicked.connect(on_room_sky)
-ui.roomBrightButton.clicked.connect(on_room_bright)
-ui.roomNormalButton.clicked.connect(on_room_normal)
-ui.roomRedButton.clicked.connect(on_room_red)
-ui.roomBlueButton.clicked.connect(on_room_blue)
-ui.roomWarmButton.clicked.connect(on_room_warm)
-ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
+    ui.roomSkyButton.clicked.connect(on_room_sky)
+    ui.roomBrightButton.clicked.connect(on_room_bright)
+    ui.roomNormalButton.clicked.connect(on_room_normal)
+    ui.roomRedButton.clicked.connect(on_room_red)
+    ui.roomBlueButton.clicked.connect(on_room_blue)
+    ui.roomWarmButton.clicked.connect(on_room_warm)
+    ui.roomVerticalSlider.valueChanged.connect(on_room_slider)
 
-ui.exitButton.clicked.connect(on_exit)
-ui.openWindowButton.clicked.connect(on_open_window)
-ui.closeWindowButton.clicked.connect(on_close_window)
-ui.autoWindowButton.clicked.connect(on_auto_window)
-
-
-Widget.showFullScreen()
-
-slidetimer = QTimer()
-slidetimer.setInterval(1500)
-slidetimer.setTimerType(Qt.PreciseTimer)
-slidetimer.timeout.connect(on_slidetimer)
-slidetimer.setSingleShot(True)
-
-timer = QTimer()
-timer.setInterval(1000)
-timer.setTimerType(Qt.PreciseTimer)
-timer.timeout.connect(on_timer)
-timestamp_start = datetime.now()
-timer.start(1000)
-
-Widget.setMouseTracking(True)
+    ui.exitButton.clicked.connect(on_exit)
+    ui.openWindowButton.clicked.connect(on_open_window)
+    ui.closeWindowButton.clicked.connect(on_close_window)
+    ui.autoWindowButton.clicked.connect(on_auto_window)
 
 
-eventFilter = UiEventFilter()
-app.installEventFilter(eventFilter)
+    Widget.showFullScreen()
 
-refreshTemp()
+    slidetimer = QTimer()
+    slidetimer.setInterval(1500)
+    slidetimer.setTimerType(Qt.PreciseTimer)
+    slidetimer.timeout.connect(on_slidetimer)
+    slidetimer.setSingleShot(True)
 
+    timer = QTimer()
+    timer.setInterval(1000)
+    timer.setTimerType(Qt.PreciseTimer)
+    timer.timeout.connect(on_timer)
+    timestamp_start = datetime.now()
+    timer.start(1000)
+
+    Widget.setMouseTracking(True)
+
+
+    eventFilter = UiEventFilter()
+    app.installEventFilter(eventFilter)
+
+    refreshTemp()
+
+    sys.exit(app.exec_())
+
+except Exception:
+    logger.exception("Catch all")
 
 #import requests
 #import pyqtgraph as pg
@@ -717,6 +734,4 @@ refreshTemp()
 #ui.gridLayout_6.addWidget(plotWidget, 0, 0, 1, 1)
 
 
-sys.exit(app.exec_())
 
-import sys
